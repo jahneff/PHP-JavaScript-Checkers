@@ -1,0 +1,22 @@
+.boardwrapper{
+    text-align: center;
+    height: 400px;
+    width: 400px;
+    border: 1px solid red;
+}
+.board{
+    color: green;
+    height: 100%;
+    width: 100%;
+}
+.boardsquare{
+    border: 1px solid blue;
+    color: blue;
+    height: 10%;
+    width: 10%;
+}
+
+.infobox{
+    margin-top: 50px;
+    border: 1px solid black;
+}
