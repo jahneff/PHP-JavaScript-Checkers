@@ -5,3 +5,7 @@ function turn(){
     alert(data);
     });
 }
+
+for (var property in gameState) {
+    output += property + ': ' + gameState[property]+'; ';
+}

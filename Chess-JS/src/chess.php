@@ -3,16 +3,9 @@
 <html lang="en" data-framework="intercoolerjs" xmlns="http://www.w3.org/1999/html">
 
 <?php
-    function pageLoad(){
-        $state = fopen("state", "r") or die("Unable to open file!");
-        $json = fread($state, filesize("state"));
-        echo "State: " . $json;
-        $decoded = json_decode($json, true);
-        var_dump($decoded);
-        fclose($state);
-    }
-    pageLoad();
+include 'functions.php';
 
+    $json_decoded = pageLoad();
 ?>
 
     <head>
@@ -25,7 +18,12 @@
     </head>
 
     <body>
-
+        <div id="name">
+            <?php echo $json_decoded["name"];?>
+        </div>
+        <div id="turn">
+            <?php echo $json_decoded["turn"];?>
+        </div>
         <div class="boardwrapper">
                 <table class="board" style="width:100%; height:100%;">
                     <?php
@@ -41,6 +39,13 @@
             <div class="infobox" id="infobox">
 
             </div>
+
+            <form id="movedata">
+                <input type="hidden" id="moveFromCoords" value="null"/>
+                <input type="hidden" id="moveToCoords" value="null"/>
+                <input type="button" onclick="move()" style="border: 1px solid black; height: 100px; width: 100px;"/>
+            </form>
+
             <div onclick="turn()" style="border: 1px solid black; height: 100px; width: 100px;">
                 Next Turn
             </div>

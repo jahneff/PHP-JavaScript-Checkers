@@ -1,15 +1,17 @@
 
 
 <?php
-if(isset($_POST['gameString'])){
-    echo $_POST['gameString'];
-    var_dump($_POST);
-}
+include 'functions.php';
+$json_decoded = pageLoad();
+$json_decoded['turn'] = strval($json_decoded['turn'] + 1);
+$json = json_encode($json_decoded);
+
 if(isset($_POST['name'])){
     $name = $_POST['name'];
-    $fp = fopen("state", 'wa+');
+    $fp = fopen("state.txt", 'wa+');
     $string = "{ \"name\": \"" . $name . "\"}";
-    fwrite($fp, $string);
+
+    fwrite($fp, $json);
     fclose($fp);
 }
 ?>
