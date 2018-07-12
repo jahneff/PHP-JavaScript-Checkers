@@ -5,4 +5,5 @@ $json = fread($state, filesize("state"));
 fclose($state);
 echo "State: " . $json;
 return json_decode($json, true);
+
 ?>

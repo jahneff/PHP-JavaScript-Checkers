@@ -2,32 +2,40 @@ var gameState;
 
 
 function select(coords){
-    document.getElementById(coords).style.backgroundColor = "green";
     if(document.getElementById("moveFromCoords").value == "null") {
-        document.getElementById("moveFromCoords").value = coords;
+            document.getElementById(coords).style.backgroundColor = "green";
+            document.getElementById("moveFromCoords").value = coords;
     }
     else {
-        document.getElementById("moveToCoords").value = coords;
+        if(document.getElementById("moveFromCoords").value == coords){
+            document.getElementById(coords).style.backgroundColor = "white";
+            document.getElementById("moveFromCoords").value = "null";
+            document.getElementById(document.getElementById("moveToCoords").value).style.backgroundColor = "white";
+            document.getElementById("moveToCoords").value = "null";
+        }
+        else if(document.getElementById("moveToCoords").value == coords) {
+            document.getElementById(coords).style.backgroundColor = "white";
+            document.getElementById("moveToCoords").value = "null";
+        }
+        else {
+            if(document.getElementById("moveToCoords").value != "null") {
+                document.getElementById(document.getElementById("moveToCoords").value).style.backgroundColor = "white";
+            }
+            document.getElementById(coords).style.backgroundColor = "orange";
+            document.getElementById("moveToCoords").value = coords;
+        }
     }
 }
 
 
 function updateBoard(gameState){
-    //document.getElementById("infobox").innerHTML = gameState.name;
     var output = '';
     for (var property in gameState) {
-        alert(property);
-        alert(gameState[property]);
         document.getElementById(property).innerHTML = gameState[property];
     }
 }
 
-function move(){
-    var moveFromCoords = document.getElementById("moveFromCoords").value;
-    alert("from" + moveFromCoords);
-    var moveToCoords = document.getElementById("moveToCoords").value;
-    alert("to" + moveToCoords);
-}
+
 
 function turn() {
     var xmlhttp;
@@ -47,21 +55,26 @@ function turn() {
                 gameState = json;
             })
                 .done(function () {
-                    alert("Success");
-                    //document.getElementById("infobox").innerHTML = gameState.name;
+                    alert("Turn Success");
                     updateBoard(gameState);
                 })
                 .fail(function (d, textStatus, error) {
-                    alert("Fail");
+                    alert("Turn Fail");
                     console.error("getJSON failed, status: " + textStatus + ", error: "+error)
                 })
             ;
         }
     };
+    var moveFromCoords = document.getElementById("moveFromCoords").value;
+    var moveToCoords = document.getElementById("moveToCoords").value;
+    alert("from" + moveFromCoords + "to" + moveToCoords);
+
 
     xmlhttp.open("POST", "../src/alterstate.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("name=Joel&turn=1");
+    xmlhttp.send();
+//    xmlhttp.send("name=Joel&turn=1");
+
 }
 
 function setupGame(){

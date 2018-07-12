@@ -18,12 +18,15 @@ include 'functions.php';
     </head>
 
     <body>
+    <div class="infobox" id="infobox">
         <div id="name">
-            <?php echo $json_decoded["name"];?>
+            <?php echo "Name: " . $json_decoded["name"];?>
         </div>
         <div id="turn">
-            <?php echo $json_decoded["turn"];?>
+            <?php echo "Turn: " . $json_decoded["turn"];?>
         </div>
+    </div>
+
         <div class="boardwrapper">
                 <table class="board" style="width:100%; height:100%;">
                     <?php
@@ -36,19 +39,13 @@ include 'functions.php';
                     }
                     ?>
                 </table>
-            <div class="infobox" id="infobox">
 
-            </div>
 
             <form id="movedata">
                 <input type="hidden" id="moveFromCoords" value="null"/>
                 <input type="hidden" id="moveToCoords" value="null"/>
-                <input type="button" onclick="move()" style="border: 1px solid black; height: 100px; width: 100px;"/>
+                <input type="button" onclick="turn()" value="Next Turn" style="border: 1px solid black; height: 20px; width: 100px;"/>
             </form>
-
-            <div onclick="turn()" style="border: 1px solid black; height: 100px; width: 100px;">
-                Next Turn
-            </div>
         </div>
     </body>
 </html>
