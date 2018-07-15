@@ -39,8 +39,6 @@ include 'functions.php';
                     }
                     ?>
                 </table>
-
-
             <form id="movedata">
                 <input type="hidden" id="moveFromCoords" value="null"/>
                 <input type="hidden" id="moveToCoords" value="null"/>
