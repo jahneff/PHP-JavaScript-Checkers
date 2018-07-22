@@ -1,0 +1,1 @@
+{"turn":"3","black":{"name":"Jimmy","isInCheck":"0"},"board":[{"piece":"none"},{"piece":"pawn"}],"btiles":[["pawn","rook","queen"],["pawn","rook","queen"],["pawn","rook","queen"]]}

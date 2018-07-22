@@ -39,8 +39,8 @@ function updateBoard(gameState){
         //alert("gamestate[black] " + property + ": " + gameState["black"][property] );
     }
     var i, j;
-    alert(gameState["board"][0][0]["type"]);
-    alert(gameState["board"][0][0]["id"]);
+    //alert(gameState["board"][0][0]["type"]);
+    //alert(gameState["board"][0][0]["id"]);
     for (i = 1; i <= 8; i++) {
         for (j = 1; j <= 8; j++) {
             //alert(i + "-" + j);
@@ -53,11 +53,16 @@ function updateBoard(gameState){
 
 function is_Legal_Move(from, to, gameState){
       //deselect old moveTo square
-    var piece = gameState["board"][(from[0]-1)][(from[1]-1)]["type"];
-    switch(piece){
-        case "b_pawn":
-            alert("It's a black pawn");
-            return pawnMove(from, to, gameState, "black");
+    var piece = gameState["board"][(from[0]-1)][(from[1]-1)];
+    switch(piece["type"]){
+        case "pawn":
+            if(piece["color"] === "white"){
+                alert("It's a white pawn");
+            }
+            else {
+                alert("It's a black pawn");
+            }
+            return pawnMove(from, to, gameState, piece["color"]);
             break;
         case "w_pawn":
             alert("It's a white pawn");
@@ -78,7 +83,7 @@ function pawnMove(from, to, gameState, color){
 }
 
 function arrayifyCoords(coords){
-    return coords.split("-", 2);
+    return coords.split("-", 2);  //coords[0] == coords.y, coords[1] == coords.x
 }
 
 function turn() {
@@ -109,11 +114,11 @@ function turn() {
             ;
         }
     };
-    var moveFromCoords = arrayifyCoords(document.getElementById("moveFromCoords").value);
     var moveToCoords = arrayifyCoords(document.getElementById("moveToCoords").value);
-    var getString = "from=" + moveFromCoords[0] + "&to=" + moveToCoords[0];
-    alert(getString);
+    var moveFromCoords = arrayifyCoords(document.getElementById("moveFromCoords").value);
     is_Legal_Move(moveFromCoords, moveToCoords, gameState);
+    var getString = "from=" + moveFromCoords[1] + ", " + moveFromCoords[0] + "&to=" + moveToCoords[1] + ", " + moveToCoords[0];
+    alert(getString);
 
     xmlhttp.open("POST", "../src/alterstate.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
