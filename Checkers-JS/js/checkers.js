@@ -2,11 +2,22 @@ var board;
 var game;
 var emptyPiece = new Piece("none", "normal");
 
+function Piece(color) {
+    this.color = color;
+    this.king = "false";
+    Piece.prototype.red = function () {
+        this.color = "red";
+    };
+    Piece.prototype.black = function () {
+        this.color = "black";
+    };
+}
+
 window.onload = function(){
     if(sessionStorage.getItem('gameObj') === null) {
         var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[]};
         for (i = 0; i < 99; i++) {
-            game['board'][i] = new Piece("none", "normal");
+            game['board'][i] = new Piece("none");
         }
         for(i = 10; i < 36; i+=2){
             game['board'][i].red();
@@ -17,7 +28,7 @@ window.onload = function(){
         sessionStorage.setItem('gameObj', JSON.stringify(game));
         alert("New board object stored in sessionStorage");
     }
-    updateBoard();
+    updateBoardHTML();
     /*
     -----------------------------------------
     Only spaces 10-89, excluding multiples of 9, are in play.
@@ -43,21 +54,9 @@ function newGame(){
     window.location("checkers.php");
 }
 
-function deselect(coords) {
-    var moveTo = document.getElementById("moveToCoords");
-    var moveFrom = document.getElementById("moveFromCoords");
-    if (moveTo.value == coords){
-        document.getElementById("moveToCoords").value = "null";
-        document.getElementById(coords).style.backgroundColor = "white";
-    }
-    else if (moveFrom.value == coords){
-        document.getElementById("moveFromCoords").value = "null";
-        document.getElementById(coords).style.backgroundColor = "white";
-    }
-}
+
 
 function select(coords){
-
     var moveTo = document.getElementById("moveToCoords");
     var moveFrom = document.getElementById("moveFromCoords");
     var clicked = document.getElementById(coords);
@@ -90,132 +89,148 @@ function arrayifyCoords(coords){
     return coords.split("-", 2).reverse();  //coords[0] == coords.y, coords[1] == coords.x
 }
 
+function inArray(needle, haystack) {
+    var length = haystack.length;
+    for(var i = 0; i < length; i++) {
+        if(haystack[i] == needle) return true;
+    }
+    return false;
+}
+
 function attemptMove(){
     game = JSON.parse(sessionStorage.getItem('gameObj'));
     var moveTo = arrayifyCoords(document.getElementById("moveToCoords").value);
     var moveFrom = arrayifyCoords(document.getElementById("moveFromCoords").value);
-    // To(X,Y) == (moveTo[1],moveTo[0])
-    // From(X,Y) == (moveFrom[1],moveFrom[0])
     var getString = "from:" + moveFrom[0] + ", to: " + moveTo[0];
-    alert(getString);
-    alert(game['board'][moveFrom[0]]['color']);
     var from = moveFrom[0];
     var to = moveTo[0];
-
     if(isLegalMove(from, to)){
-        alert("Is legal move: true");
         Move(from, to);
-        updateBoard();
+        updateBoardHTML();
     }
     else {
-        alert("Is legal move: false");
+        alert("Not a legal move");
     }
 }
 
 function Move(from, to){
-    alert("yo");
     game['board'][to] = game['board'][from];
     game['board'][from] = emptyPiece;
     var dist = from - to;
     if(Math.abs(dist) > 10){
-        game['board'][(from - (dist/2))] = emptyPiece;
-        deselect("sq-" + to);
-        deselect("sq-" + from);
-        select("sq-" + to);
+        game['board'][(from - Math.floor(dist/2))] = emptyPiece;
+        select("sq-" + from);           //deselect both squares
+        select("sq-" + to);             //then reselect the new square
     }
     else {
-        alert("here");
-
-        deselect("sq-" + to);
-        alert("here");
-
-        deselect("sq-" + from);
-
+        select("sq-" + from);           //deselect both squares
+    }
+    if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
+        game['board'][to].king = "True";
+    }
+    else if((to >= 73 && to <= 80) && game['board'][to].color === "red") {
+        game['board'][to].king = "True";
     }
     sessionStorage.setItem('gameObj', JSON.stringify(game));
 }
 
+
 function isLegalMove(from, to){
+    if(game['board'][to]['color'] !== "none") { //is the space being moved to already occupied?
+        return false;
+    }
+
     var dist = from - to;
-    switch(game['board'][from]['color']){
+    var movingPiece = game['board'][from];
+    var jumpedPiece = game['board'][(from - Math.floor(dist / 2))];
+    var redMoves = [-8, -10];
+    var redJumps = [-16, -20];
+    var blackMoves = [8, 10];
+    var blackJumps = [16, 20];
+    var kingMoves = redMoves.concat(blackMoves);
+    var kingJumps= redJumps.concat(blackJumps);
+
+    switch(movingPiece.color){
         case "red":
-            if(game['board'][to]['color'] !== "none"){
-                return false;
+            var moves;
+            if (movingPiece.king === "True") {
+                moves = kingMoves;
+                jumps = kingJumps;
             }
-            if ((dist === -8 || dist === -10)){
-                //endTurn();
+            else {
+                moves = redMoves;
+                jumps = redJumps;
+            }
+
+            if (inArray(dist, moves)){
+                    //endTurn();
                 return true;
             }
-            var jumpedOver = from - (dist / 2);
-            if ((dist === -16 || dist === -20) && game['board'][jumpedOver]['color'] === "black"){
-                alert(game['black']['pieceslost']);
-                game['black']['pieceslost'] = game['black']['pieceslost'] + 1;
-                alert(game['black']['pieceslost']);
-                return true;
+            else if (inArray(dist, jumps) && jumpedPiece.color === "black") {
+                    game['black']['pieceslost']++;
+                    return true;
             }
             return false;
         case "black":
-            if(game['board'][to]['color'] !== "none"){
-                return false;
+            var moves;
+            if (movingPiece.king === "True") {
+                moves = kingMoves;
+                jumps = kingJumps;
             }
-            if ((dist === 8 || dist === 10)){
+            else {
+                moves = blackMoves;
+                jumps = blackJumps;
+            }
+
+            if (inArray(dist, moves)){
                 //endTurn();
                 return true;
             }
-            var jumpedOver = from - (dist / 2);
-            if ((dist === 16 || dist === 20) && game['board'][jumpedOver]['color'] === "red"){
-                alert(game['black']['pieceslost']);
-                game['red']['pieceslost'] = game['red']['pieceslost'] + 1;
-                alert(game['black']['pieceslost']);
+            else if (inArray(dist, jumps) && jumpedPiece.color === "red") {
+                game['red']['pieceslost']++;
                 return true;
             }
-                return false;
-        default:
-            alert(game['board'][to]['color']);
+            return false;
+        default: //clicked square has no piece
             return false;
     }
 }
 
-function Piece(color, type){
-    this.color = color;
-    this.type = type;
-    Piece.prototype.red = function(){
-        this.color = "red";
-    };
-    Piece.prototype.black = function(){
-        this.color = "black";
-    };
+function updateSquareHTML(square, i){
+    if(square['color'] !== "none") {
+        if(square['king'] === "True"){
+            document.getElementById("sq-" + i).innerHTML = "<i class='fas fa-chess-king' style='color: " + square['color'] + ";'></i>";
+        }
+        else {
+            document.getElementById("sq-" + i).innerHTML = "<i class='fas fa-hockey-puck' style='color: " + square['color'] + ";'></i>";
+        }
+    }
+    else {
+        document.getElementById("sq-" + i).innerHTML = " ";
+    }
 }
 
-function updateBoard(){
+function updateBoardHTML(){
     //board = JSON.parse(sessionStorage.getItem('boardObj'));
     game = JSON.parse(sessionStorage.getItem('gameObj'));
 
     //Instantiate pieces on board
     var i = 0;
     for (i = 10; i < 81; i++) {
-        if((i % 9) != 0){
-            //document.getElementById("sq-" + i).innerHTML = board[i]['color'];
-            if(game['board'][i]['color'] !== "none") {
-                document.getElementById("sq-" + i).innerHTML = "<i class='fas fa-hockey-puck' style='color: " + game['board'][i]['color'] + ";'></i>";
-            }
-            else {
-                document.getElementById("sq-" + i).innerHTML = " ";
-            }
+        if((i % 9) !== 0){
+            updateSquareHTML(game['board'][i], i);
         }
     }
-
-    //for debug board in top corner
+    //debug board in top corner
     for (i = 10; i < 81; i++) {
-        if((i % 9) != 0) {
+        if((i % 9) !== 0) {
             document.getElementById("tile" + i).innerHTML = i;
-            document.getElementById("tile" + i).innerHTML = "<i class='fas fa-hockey-puck' style='color: " + game['board'][i]['color'] + ";'></i>";
-
+            //document.getElementById("tile" + i).innerHTML = "<i class='fas fa-hockey-puck' style='color: " + game['board'][i]['color'] + ";'></i>";
         }
     }
 
     //update pieces lost display
-    
+
     document.getElementById("red-pieces-lost").innerHTML = "Red pieces lost: " + game['red']['pieceslost'];
     document.getElementById("black-pieces-lost").innerHTML = "Black pieces lost: " + game['black']['pieceslost'];
 }

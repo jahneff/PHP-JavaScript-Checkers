@@ -24,3 +24,16 @@ function move(){
     var moveToCoords = document.getElementById("moveToCoords").value;
     alert("to" + moveToCoords);
 }
+
+function deselect(coords) {
+    var moveTo = document.getElementById("moveToCoords");
+    var moveFrom = document.getElementById("moveFromCoords");
+    if (moveTo.value == coords){
+        document.getElementById("moveToCoords").value = "null";
+        document.getElementById(coords).style.backgroundColor = "white";
+    }
+    else if (moveFrom.value == coords){
+        document.getElementById("moveFromCoords").value = "null";
+        document.getElementById(coords).style.backgroundColor = "white";
+    }
+}

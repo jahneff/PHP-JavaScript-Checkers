@@ -65,8 +65,8 @@
         <div id="red-pieces-lost">yo</div>
         <div id="black-pieces-lost">hi</div>
 
-        <input type="hidden" id="moveFromCoords" value="null"/>
-        <input type="hidden" id="moveToCoords" value="null"/>
+        <input type="text" id="moveFromCoords" value="null"/>
+        <input type="text" id="moveToCoords" value="null"/>
         <input type="button" onclick="attemptMove()" value="Next Turn" style="border: 1px solid black; height: 20px; width: 100px;"/>
         <input type="button" onclick="newGame()" value="New game" style="border: 1px solid black; height: 20px; width: 100px;"/>
 
