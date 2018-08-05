@@ -37,3 +37,36 @@ function deselect(coords) {
         document.getElementById(coords).style.backgroundColor = "white";
     }
 }
+
+function select(coords){
+    selectHTML(coords);
+    var moveTo = document.getElementById("moveToCoords");
+    var moveFrom = document.getElementById("moveFromCoords");
+
+    var clickedSquare = document.getElementById(coords);
+    var toSquare = document.getElementById(moveTo.value);
+
+    if(moveFrom.value == "null") {                      //MoveFrom has not been selected
+        clickedSquare.style.backgroundColor = "green";    //Select clicked square
+        moveFrom.value = coords;                    //Update moveFrom form value
+    }
+    else {                                              //MoveFrom has been selected
+        if(moveFrom.value == coords){                   //Clicked square is moveFrom
+            clickedSquare.style.backgroundColor = "white";    //deselect clicked square
+            moveFrom.value = "null";                    //reset moveFrom form value
+            toSquare.style.backgroundColor = "white";      //deselect moveTo square
+            moveTo.value = "null";                      //reset moveTo value
+        }
+        else if(moveTo.value == coords) {               //Clicked square is moveTo
+            clickedSquare.style.backgroundColor = "white";    //Deselect clicked square
+            moveTo.value = "null";                      //reset moveTo value
+        }
+        else {
+            if(moveTo.value != "null") {                //Clicked square is new
+                toSquare.style.backgroundColor = "white";  //deselect old moveTo square
+            }
+            clickedSquare.style.backgroundColor = "orange";   //select new moveTo square
+            moveTo.value = coords;                      //update moveTo form value
+        }
+    }
+}
