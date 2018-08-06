@@ -144,9 +144,16 @@ function Move(from, to){
     game['board'][to] = game['board'][from];
     game['board'][from] = emptyPiece;
     var dist = from - to;
+
+    if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
+        game['board'][to].king = "True";
+    }
+    else if((to >= 73 && to <= 80) && game['board'][to].color === "red") {
+        game['board'][to].king = "True";
+    }
+
     if(Math.abs(dist) > 10){
         game['board'][(from - Math.floor(dist/2))] = emptyPiece;  //remove jumped piece from board
-
         if(pieceHasJump(to)){
             alert("another jump is available.");
             game['jumpsonly'] = 1;
@@ -159,23 +166,19 @@ function Move(from, to){
     else{
         endTurn();
     }
-    if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
-        game['board'][to].king = "True";
-    }
-    else if((to >= 73 && to <= 80) && game['board'][to].color === "red") {
-        game['board'][to].king = "True";
-    }
+
     sessionStorage.setItem('gameObj', JSON.stringify(game));
 }
 
 
 function isLegalMove(from, to){
-    if(game['board'][to]['color'] !== "none") { //is the space being moved to already occupied?
-        return false;
-    }
     if (to < 10 || to > 80){ //is the space being moved to off the board?
         return false;
     }
+    if(game['board'][to]['color'] !== "none") { //is the space being moved to already occupied?
+        return false;
+    }
+
     var phase = game['jumpsonly'];
     var dist = from - to;
     var movingPiece = game['board'][from];
@@ -287,8 +290,15 @@ function updateBoardHTML(){
 
     document.getElementById("red-pieces-lost").innerHTML = "Red pieces lost: " + game['red']['pieceslost'];
     document.getElementById("black-pieces-lost").innerHTML = "Black pieces lost: " + game['black']['pieceslost'];
+
     document.getElementById("current-turn").innerHTML = "Turn " + game['turn'];
-    document.getElementById("current-turn-phase").innerHTML = "Turnphase " + game['jumpsonly'];
+    if(game['turn'] % 2 == 1){
+        document.getElementById("team-to-move").innerHTML = "black";
+    }
+    else {
+        document.getElementById("team-to-move").innerHTML = "red";
+    }
+    document.getElementById("jumps-only").innerHTML = "Turnphase " + game['jumpsonly'];
 
 }
 
