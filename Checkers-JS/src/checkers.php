@@ -35,7 +35,7 @@
                 $end = $index + 8;
             }
             else {
-                echo "<td id='tile" . $index . "' class='boardsquare' onclick='select(this.id)'></td>";
+                echo "<td id='tile" . $index . "' class='boardsquare' onclick=''></td>";
                 if (($index % 8) == $end) {
                     echo "</tr>";
                 }

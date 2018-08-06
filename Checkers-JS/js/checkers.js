@@ -63,10 +63,6 @@ function cpuAttemptMove(from, to){
 
 }
 
-function selectHTML(coords){
-
-}
-
 function deselect() {
     var moveFrom = document.getElementById("moveFromCoords").value;
     if(moveFrom !== "null") {
@@ -76,7 +72,6 @@ function deselect() {
 }
 
 function select(coords){
-    //selectHTML(coords);
     coords = arrayifyCoords(coords);
     var moveTo = document.getElementById("moveToCoords");
     var moveFrom = document.getElementById("moveFromCoords");
@@ -110,8 +105,8 @@ function select(coords){
     }
 }
 
-function arrayifyCoords(coords){
-    coords = coords.split("-", 2).reverse();  //coords[0] == coords.y, coords[1] == coords.x
+function arrayifyCoords(coords){ //Takes sq-# as an argument and returns only #
+    coords = coords.split("-", 2).reverse();
     return coords[0];
 }
 
@@ -131,16 +126,15 @@ function attemptMove(from, to){
         return true;
     }
     else {
-        alert("Not a legal move");
         return false;
     }
 }
 
 function pieceHasJump(from){
-    if (isLegalMove(from, from - parseFloat(16)) ||
-        isLegalMove(from, from - parseFloat(20)) ||
-        isLegalMove(from, parseFloat(from) + parseFloat(16)) ||
-        isLegalMove(from, parseFloat(from) + parseFloat(20))){
+    if (isLegalMove(from, parseFloat(from) - 16) ||
+        isLegalMove(from, parseFloat(from) - 20) ||
+        isLegalMove(from, parseFloat(from) + 16) ||
+        isLegalMove(from, parseFloat(from) + 20)){
         return true;
     }
     return false;
@@ -152,11 +146,17 @@ function Move(from, to){
     var dist = from - to;
     if(Math.abs(dist) > 10){
         game['board'][(from - Math.floor(dist/2))] = emptyPiece;  //remove jumped piece from board
+
+        if(pieceHasJump(to)){
+            alert("another jump is available.");
+            game['jumpsonly'] = 1;
+        }
+        else {
+            alert("No other jumps avaiable, ending turn");
+            endTurn();
+        }
     }
-    if(pieceHasJump(to)){
-        game['jumpsonly'] = 1;
-    }
-    else {
+    else{
         endTurn();
     }
     if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
@@ -171,6 +171,9 @@ function Move(from, to){
 
 function isLegalMove(from, to){
     if(game['board'][to]['color'] !== "none") { //is the space being moved to already occupied?
+        return false;
+    }
+    if (to < 10 || to > 80){ //is the space being moved to off the board?
         return false;
     }
     var phase = game['jumpsonly'];

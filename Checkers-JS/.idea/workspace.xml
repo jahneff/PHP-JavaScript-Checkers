@@ -14,8 +14,8 @@
       <file leaf-file-name="checkers.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/checkers.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="633">
-              <caret line="74" column="50" lean-forward="false" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
+            <state relative-caret-position="208">
+              <caret line="37" column="79" lean-forward="false" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -44,12 +44,12 @@
       <file leaf-file-name="checkers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/checkers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="142" column="32" lean-forward="false" selection-start-line="142" selection-start-column="32" selection-end-line="142" selection-end-column="32" />
+            <state relative-caret-position="1904">
+              <caret line="175" column="26" lean-forward="true" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
               <folding>
-                <marker date="1533507749679" expanded="true" signature="7433:7464" ph="..." />
-                <marker date="1533507749679" expanded="true" signature="7595:7626" ph="..." />
-                <marker date="1533507749679" expanded="true" signature="8522:8563" ph="..." />
+                <marker date="1533521785792" expanded="true" signature="7584:7615" ph="..." />
+                <marker date="1533521785792" expanded="true" signature="7746:7777" ph="..." />
+                <marker date="1533521785792" expanded="true" signature="8673:8714" ph="..." />
               </folding>
             </state>
           </provider>
@@ -106,14 +106,15 @@
       <find>select</find>
       <find>endTu</find>
       <find>turnph</find>
+      <find>squareHTML</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/css/styles.css" />
-        <option value="$PROJECT_DIR$/src/checkers.php" />
         <option value="$PROJECT_DIR$/js/oddsnends.js" />
+        <option value="$PROJECT_DIR$/src/checkers.php" />
         <option value="$PROJECT_DIR$/js/checkers.js" />
       </list>
     </option>
@@ -208,18 +209,17 @@
       <option name="presentableId" value="Default" />
       <updated>1531856981020</updated>
       <workItem from="1531856982162" duration="48844000" />
-      <workItem from="1533161037488" duration="24519000" />
+      <workItem from="1533161037488" duration="29238000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73363000" />
+    <option name="totallyTimeSpent" value="78082000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="36" y="46" width="1294" height="998" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24960877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24960877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -303,9 +303,9 @@
         <state relative-caret-position="2856">
           <caret line="168" column="18" lean-forward="false" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
           <folding>
-            <marker date="1533507749679" expanded="true" signature="7433:7464" ph="..." />
-            <marker date="1533507749679" expanded="true" signature="7595:7626" ph="..." />
-            <marker date="1533507749679" expanded="true" signature="8522:8563" ph="..." />
+            <marker date="1533521785792" expanded="true" signature="7584:7615" ph="..." />
+            <marker date="1533521785792" expanded="true" signature="7746:7777" ph="..." />
+            <marker date="1533521785792" expanded="true" signature="8673:8714" ph="..." />
           </folding>
         </state>
       </provider>
@@ -352,20 +352,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/checkers.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="74" column="50" lean-forward="false" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
+        <state relative-caret-position="208">
+          <caret line="37" column="79" lean-forward="false" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/checkers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="142" column="32" lean-forward="false" selection-start-line="142" selection-start-column="32" selection-end-line="142" selection-end-column="32" />
+        <state relative-caret-position="1904">
+          <caret line="175" column="26" lean-forward="true" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
           <folding>
-            <marker date="1533507749679" expanded="true" signature="7433:7464" ph="..." />
-            <marker date="1533507749679" expanded="true" signature="7595:7626" ph="..." />
-            <marker date="1533507749679" expanded="true" signature="8522:8563" ph="..." />
+            <marker date="1533521785792" expanded="true" signature="7584:7615" ph="..." />
+            <marker date="1533521785792" expanded="true" signature="7746:7777" ph="..." />
+            <marker date="1533521785792" expanded="true" signature="8673:8714" ph="..." />
           </folding>
         </state>
       </provider>
