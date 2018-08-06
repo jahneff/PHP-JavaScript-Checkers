@@ -27,9 +27,12 @@ window.onload = function(){
         for(i = 10; i < 36; i+=2){
             game['board'][i].red();
         }
+        game['board'][18].color = "none"; //would be placed off the board, in the hidden column
         for(i = 56; i < 82; i+=2){
             game['board'][i].black();
         }
+        game['board'][72].color = "none"; //would be placed off the board, in the hidden column
+
         sessionStorage.setItem('gameObj', JSON.stringify(game));
         alert("New board object stored in sessionStorage");
     }
@@ -172,7 +175,7 @@ function Move(from, to){
 
 
 function isLegalMove(from, to){
-    if (to < 10 || to > 80){ //is the space being moved to off the board?
+    if (to < 10 || to > 80 || (to % 9) === 0){ //is the space being moved to off the board?
         return false;
     }
     if(game['board'][to]['color'] !== "none") { //is the space being moved to already occupied?
@@ -267,6 +270,39 @@ function leavePhase() {
     updateBoardHTML();
 }
 
+function cpuTurn(){
+    //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move. 
+    for (i = 10; i < 81; i++) {
+        if(game['board'][i].color === "red") {
+            if(attemptMove(i, (parseFloat(i) + 16))) {
+                return true;
+            }
+            else if (attemptMove(i, (parseFloat(i) + 20))) {
+                return true;
+            }
+            if(game['board'][i].king === "True") {
+                alert("hi");
+                if (attemptMove(i, (parseFloat(i) - 16))) {
+                    return true;
+                }
+                else if (attemptMove(i, (parseFloat(i) - 20))) {
+                    return true;
+                }
+            }
+        }
+    }
+    for (j = 10; j < 81; j++) {
+        if(game['board'][j].color === "red") {
+            if (attemptMove(j, (parseFloat(j) + 8))){
+                return true;
+            }
+            else if (attemptMove(j, (parseFloat(j) + 10))){
+                return true;
+            }
+        }
+    }
+}
+
 function updateBoardHTML(){
     //board = JSON.parse(sessionStorage.getItem('boardObj'));
     game = JSON.parse(sessionStorage.getItem('gameObj'));
@@ -284,6 +320,9 @@ function updateBoardHTML(){
             document.getElementById("tile" + i).innerHTML = i;
             //document.getElementById("tile" + i).innerHTML = "<i class='fas fa-hockey-puck' style='color: " + game['board'][i]['color'] + ";'></i>";
         }
+        document.getElementById("tile" + 18).innerHTML = 18;
+        document.getElementById("tile" + 72).innerHTML = 72;
+
     }
 
     //update pieces lost display
@@ -297,6 +336,7 @@ function updateBoardHTML(){
     }
     else {
         document.getElementById("team-to-move").innerHTML = "red";
+        cpuTurn();
     }
     document.getElementById("jumps-only").innerHTML = "Turnphase " + game['jumpsonly'];
 
