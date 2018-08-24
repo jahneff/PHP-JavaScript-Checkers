@@ -18,27 +18,23 @@ function Player(color, first) {
     this.takeFirstTurn = first;
 }
 
-function createNewGameObject(){
-    var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], turn: 1, jumpsonly: 0};
-    for (i = 0; i < 99; i++) {
-        game['board'][i] = new Piece("none");
-    }
-    for(i = 10; i < 36; i+=2){
-        game['board'][i].red();
-    }
-    game['board'][18].color = "none"; //would be placed off the board, in the hidden column
-    for(i = 56; i < 82; i+=2){
-        game['board'][i].black();
-    }
-    game['board'][72].color = "none"; //would be placed off the board, in the hidden column
-
-    sessionStorage.setItem('gameObj', JSON.stringify(game));
-    alert("New board object stored in sessionStorage");
-}
-
 window.onload = function(){
     if(sessionStorage.getItem('gameObj') === null) {
-        createNewGameObject();
+        var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], turn: 1, jumpsonly: 0};
+        for (i = 0; i < 99; i++) {
+            game['board'][i] = new Piece("none");
+        }
+        for(i = 10; i < 36; i+=2){
+            game['board'][i].red();
+        }
+        game['board'][18].color = "none"; //would be placed off the board, in the hidden column
+        for(i = 56; i < 82; i+=2){
+            game['board'][i].black();
+        }
+        game['board'][72].color = "none"; //would be placed off the board, in the hidden column
+
+        sessionStorage.setItem('gameObj', JSON.stringify(game));
+        alert("New board object stored in sessionStorage");
     }
     updateBoardHTML();
     /*
@@ -206,7 +202,6 @@ function Move(from, to){
     game['board'][from] = emptyPiece;
     var dist = from - to;
 
-
     if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
         game['board'][to].king = "True";
     }
@@ -219,9 +214,7 @@ function Move(from, to){
         if(pieceHasJump(to)){
             game['jumpsonly'] = 1;
             sessionStorage.setItem('gameObj', JSON.stringify(game));
-            if(game['board'][to].color === "red"){ //was it the cpus turn?
-                cpuTurn();
-            }
+            cpuTurn();
         }
         else {
             endTurn();
