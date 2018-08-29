@@ -150,6 +150,15 @@ function pieceHasJump(from){
     return false;
 }
 
+function pieceHasJump2(from){
+    if (isLegalMove2(from, parseFloat(from) - 16) ||
+        isLegalMove2(from, parseFloat(from) - 20) ||
+        isLegalMove2(from, parseFloat(from) + 16) ||
+        isLegalMove2(from, parseFloat(from) + 20)){
+        return true;
+    }
+    return false;
+}
 
 
 function myMove(from, to) {
@@ -303,6 +312,70 @@ function isLegalMove(from, to){
     }
 }
 
+function isLegalMove2(from, to){
+    if (to < 10 || to > 80 || ((to % 9) === 0)){ //is the space being moved to off the board?
+        return false;
+    }
+    if(game['board'][to]['color'] !== "none") { //is the space being moved to already occupied?
+        return false;
+    }
+
+    var phase = game['jumpsonly'];
+    var dist = from - to;
+    var movingPiece = game['board'][from];
+    var jumpedPiece = game['board'][(from - Math.floor(dist / 2))];
+    var redMoves = [-8, -10];
+    var redJumps = [-16, -20];
+    var blackMoves = [8, 10];
+    var blackJumps = [16, 20];
+    var kingMoves = redMoves.concat(blackMoves);
+    var kingJumps= redJumps.concat(blackJumps);
+    switch(movingPiece.color){
+        case "red":
+
+            var moves;
+            if (movingPiece.king === "True") {
+                moves = kingMoves;
+                jumps = kingJumps;
+            }
+            else {
+                moves = redMoves;
+                jumps = redJumps;
+            }
+
+            if (inArray(dist, moves) && phase == 0){
+                return true;
+            }
+            else if (inArray(dist, jumps) && jumpedPiece.color === "black") {
+                game['black']['pieceslost']++;
+                return true;
+            }
+            return false;
+        case "black":
+
+            var moves;
+            if (movingPiece.king === "True") {
+                moves = kingMoves;
+                jumps = kingJumps;
+            }
+            else {
+                moves = blackMoves;
+                jumps = blackJumps;
+            }
+
+            if (inArray(dist, moves) && phase == 0){
+                return true;
+            }
+            else if (inArray(dist, jumps) && jumpedPiece.color === "red") {
+                game['red']['pieceslost']++;
+                return true;
+            }
+            return false;
+        default: //clicked square has no piece
+            return false;
+    }
+}
+
 function updateSquareHTML(square, i){
     if(square['color'] !== "none") {
         if(square['king'] === "True"){
@@ -332,30 +405,138 @@ function leavePhase() {
     updateBoardHTML();
 }
 
-function miniMax(board, depth, score){
+function runMiniMax() {
+    endTurn();
+    var board = game['board'];
+    miniMax(board, 0, 0);
+}
+
+function getScore(board) {
+    var score = 0;
     for (i = 10; i < 81; i++) {
-        if(game['board'][i].color === "red") {
-            if(i < 63) { //prevents off-board jump attempt for cpu pieces on the first rank
-                if (attemptMove(i, (parseFloat(i) + 16))) {
-                    return true;
+        if(board[i].color === "red") {
+            score++;
+        }
+        else if (board[i].color === "black") {
+            score--;
+        }
+    }
+    return score;
+}
+
+function miniMax(board, depth, score){
+    var originalBoard = board;
+    score = getScore(board);
+    if(depth === 4){
+        alert("depth == 4, returning score: " + score);
+        return score;
+    }
+    if(depth % 2 === 0){
+        var colorToMove = "red";
+        var flip = 1;   //changes movement direction based on team moving
+    }
+    else {
+        var colorToMove = "black";
+        var flip = -1;
+    }
+    for (var i = 10; i < 81; i++) {
+        if(board[i].color === colorToMove) {
+            var num1 = 16 * flip;
+            var num2 = 20 * flip;
+            var num3 = 8 * flip;
+            var num4 = 10 * flip;
+
+            if (isLegalMove2(i, (parseFloat(i) + num1)) && (i < 63)) {
+                    alert(colorToMove + " moves from: " + i + ", to: " + (parseFloat(i) + num1) + ", depth: " + depth);
+                    board = miniMaxMove(board, i, parseFloat(i) + num1);
+                    myMove(i, parseFloat(i) + num1);
+
+                    updateBoardHTML2(board);
+                    score = miniMax(board, depth+1, score);
+                alert(colorToMove + " moves back from: " + (parseFloat(i) + num1) + ", to: " + i + ", depth: " + depth);
+                board = miniMaxMove(board, parseFloat(i) + num1, i);
+                /*if(colorToMove === "red") {
+                    board[(i - Math.floor(num1 / 2))].black();  //re add jumped piece from board
                 }
-                else if (attemptMove(i, (parseFloat(i) + 20))) {
-                    return true;
-                }
+                else {
+                    board[(i - Math.floor(num1 / 2))].red();  //re add jumped piece from board
+                }*/
+                updateBoardHTML2(board);
+
             }
-            if(game['board'][i].king === "True") {
-                if (attemptMove(i, (parseFloat(i) - 16))) {
-                    return true;
+
+            if (isLegalMove2(i, (parseFloat(i) + num2)) && (i < 63)){
+                    alert(colorToMove + " moves from: " + i + ", to: " + (parseFloat(i) + num2) + ", depth: " + depth);
+                    board = miniMaxMove(board, i, parseFloat(i) + num2);
+                    myMove(i, parseFloat(i) + num2);
+
+                    updateBoardHTML2(board);
+                    score = miniMax(board, depth+1, score);
+                alert(colorToMove + " moves back from: " + (parseFloat(i) + num2) + ", to: " + i + ", depth: " + depth);
+                board = miniMaxMove(board, parseFloat(i) + num2, i);
+                /*if(colorToMove === "red") {
+                    board[(i - Math.floor(num2 / 2))].black();  //re add jumped piece from board
                 }
-                else if (attemptMove(i, (parseFloat(i) - 20))) {
-                    return true;
-                }
+                else {
+                    board[(i - Math.floor(num2 / 2))].red();  //re add jumped piece from board
+                }*/
+                updateBoardHTML2(board);
+
+            }
+
+
+            if (isLegalMove2(i, (parseFloat(i) + num3))) {
+                    alert(colorToMove + " moves from: " + i + ", to: " + (parseFloat(i) + num3) + ", depth: " + depth);
+                    board = miniMaxMove(board, i, parseFloat(i) + num3);
+                myMove(i, parseFloat(i) + num3);
+                updateBoardHTML2(board);
+                    score = miniMax(board, depth+1, score);
+                alert(colorToMove + " moves back from: " + (parseFloat(i) + num3) + ", to: " + i + ", depth: " + depth);
+                board = miniMaxMove(board, parseFloat(i) + num3, i);
+                updateBoardHTML2(board);
+
+            }
+
+            if (isLegalMove2(i, (parseFloat(i) + num4))) {
+                    alert(colorToMove + " moves from: " + i + ", to: " + (parseFloat(i) + num4) + ", depth: " + depth);
+                    board = miniMaxMove(board, i, parseFloat(i) + num4);
+                    myMove(i, parseFloat(i) + num4);
+                    updateBoardHTML2(board);
+                    score = miniMax(board, depth+1, score);
+                alert(colorToMove + " moves back from: " + (parseFloat(i) + num4) + ", to: " + i + ", depth: " + depth);
+
+                board = miniMaxMove(board, parseFloat(i) + num4, i);
+                updateBoardHTML2(board);
             }
         }
     }
+    alert("depth: " + depth + "score: " + score);
+    return score;
+}
+
+function miniMaxMove(board, from, to){
+        board[to] = board[from];
+        board[from] = emptyPiece;
+        var dist = from - to;
+
+        if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
+            board[to].king = "True";
+        }
+        else if((to >= 73 && to <= 80) && game['board'][to].color === "red") {
+            board[to].king = "True";
+        }
+
+        if(Math.abs(dist) > 10){
+            board[(from - Math.floor(dist/2))] = emptyPiece;  //remove jumped piece from board
+            if(pieceHasJump2(to)){
+                var jumpsonly = 1; //will need to work with this to allow multiple jumps
+            }
+        }
+        return board;
 }
 
 function merciless(){
+
     for (i = 10; i < 81; i++) {
         if(game['board'][i].color === "red") {
             if(i < 63) { //prevents off-board jump attempt for cpu pieces on the first rank
@@ -403,6 +584,15 @@ function cpuTurn(){
         return true;
     }
     return false;
+}
+
+function updateBoardHTML2(board) {
+    //Instantiate pieces on board
+    for (var i = 10; i < 81; i++) {
+        if((i % 9) !== 0){
+            updateSquareHTML(board[i], i);
+        }
+    }
 }
 
 function updateBoardHTML(){

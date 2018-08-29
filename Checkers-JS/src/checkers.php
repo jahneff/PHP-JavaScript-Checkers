@@ -97,6 +97,7 @@
                 <input type="button" onclick="newGame()" value="New game" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="leavePhase()" value="End Turn" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="cpuTurn()" value="CPUturn" style="border: 1px solid black; height: 20px; width: 100px;"/>
+                <input type="button" onclick="runMiniMax()" value="Run Minimax" style="border: 1px solid black; height: 20px; width: 100px;"/>
 
 
 
