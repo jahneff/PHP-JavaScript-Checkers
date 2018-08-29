@@ -83,6 +83,8 @@ function deselect() {
     }
 }
 
+
+
 function select(coords){
     coords = arrayifyCoords(coords);
     var moveTo = document.getElementById("moveToCoords");
@@ -94,19 +96,17 @@ function select(coords){
 
     else {//MoveFrom already has a value. The user has now clicked on a square to move to.
         moveTo.value = coords;                      //update moveTo form value
-        var fromSquare = document.getElementById("sq-" + moveFrom.value);
-        var toSquare = document.getElementById("sq-" + moveTo.value);
         if(attemptMove(moveFrom.value, moveTo.value)) {
-            fromSquare.style.backgroundColor = "white";    //Select clicked square
+            document.getElementById("sq-" + moveFrom.value).style.backgroundColor = "white";    //Deselect from square
+            if (game['jumpsonly'] === 1) {  //More jumps are available for moved piece
+                select(moveFrom.value); //Select clicked square
+            }
             moveTo.value = "null";
             moveFrom.value = "null";
-            if (game['jumpsonly'] === 1) {
-                select(coords);
-            }
         }
         else {
             if (coords == moveFrom.value && game['jumpsonly'] == 0) {
-                fromSquare.style.backgroundColor = "white";
+                document.getElementById("sq-" + moveFrom.value).style.backgroundColor = "white";    //Deselect from square
                 moveFrom.value = "null";
                 moveTo.value = "null";
             }
@@ -332,8 +332,30 @@ function leavePhase() {
     updateBoardHTML();
 }
 
-function cpuTurn(){
-    //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move.
+function miniMax(board, depth, score){
+    for (i = 10; i < 81; i++) {
+        if(game['board'][i].color === "red") {
+            if(i < 63) { //prevents off-board jump attempt for cpu pieces on the first rank
+                if (attemptMove(i, (parseFloat(i) + 16))) {
+                    return true;
+                }
+                else if (attemptMove(i, (parseFloat(i) + 20))) {
+                    return true;
+                }
+            }
+            if(game['board'][i].king === "True") {
+                if (attemptMove(i, (parseFloat(i) - 16))) {
+                    return true;
+                }
+                else if (attemptMove(i, (parseFloat(i) - 20))) {
+                    return true;
+                }
+            }
+        }
+    }
+}
+
+function merciless(){
     for (i = 10; i < 81; i++) {
         if(game['board'][i].color === "red") {
             if(i < 63) { //prevents off-board jump attempt for cpu pieces on the first rank
@@ -363,6 +385,22 @@ function cpuTurn(){
                 return true;
             }
         }
+        if(game['board'][i].king === "True") {
+            if (attemptMove(i, (parseFloat(i) - 8))) {
+                return true;
+            }
+            else if (attemptMove(i, (parseFloat(i) - 10))) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function cpuTurn(){
+    //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move.
+    if(merciless()){
+        return true;
     }
     return false;
 }

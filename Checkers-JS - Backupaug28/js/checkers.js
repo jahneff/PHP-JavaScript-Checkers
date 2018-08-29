@@ -18,23 +18,27 @@ function Player(color, first) {
     this.takeFirstTurn = first;
 }
 
+function createNewGameObject(){
+    var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], turn: 1, jumpsonly: 0};
+    for (i = 0; i < 99; i++) {
+        game['board'][i] = new Piece("none");
+    }
+    for(i = 10; i < 36; i+=2){
+        game['board'][i].red();
+    }
+    game['board'][18].color = "none"; //would be placed off the board, in the hidden column
+    for(i = 56; i < 82; i+=2){
+        game['board'][i].black();
+    }
+    game['board'][72].color = "none"; //would be placed off the board, in the hidden column
+
+    sessionStorage.setItem('gameObj', JSON.stringify(game));
+    alert("New board object stored in sessionStorage");
+}
+
 window.onload = function(){
     if(sessionStorage.getItem('gameObj') === null) {
-        var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], turn: 1, jumpsonly: 0};
-        for (i = 0; i < 99; i++) {
-            game['board'][i] = new Piece("none");
-        }
-        for(i = 10; i < 36; i+=2){
-            game['board'][i].red();
-        }
-        game['board'][18].color = "none"; //would be placed off the board, in the hidden column
-        for(i = 56; i < 82; i+=2){
-            game['board'][i].black();
-        }
-        game['board'][72].color = "none"; //would be placed off the board, in the hidden column
-
-        sessionStorage.setItem('gameObj', JSON.stringify(game));
-        alert("New board object stored in sessionStorage");
+        createNewGameObject();
     }
     updateBoardHTML();
     /*
@@ -90,19 +94,17 @@ function select(coords){
 
     else {//MoveFrom already has a value. The user has now clicked on a square to move to.
         moveTo.value = coords;                      //update moveTo form value
-        var fromSquare = document.getElementById("sq-" + moveFrom.value);
-        var toSquare = document.getElementById("sq-" + moveTo.value);
         if(attemptMove(moveFrom.value, moveTo.value)) {
-            fromSquare.style.backgroundColor = "white";    //Select clicked square
+            document.getElementById("sq-" + moveFrom.value).style.backgroundColor = "white";    //Deselect from square
+            if (game['jumpsonly'] === 1) {  //More jumps are available for moved piece
+                select(moveFrom.value); //Select clicked square
+            }
             moveTo.value = "null";
             moveFrom.value = "null";
-            if (game['jumpsonly'] === 1) {
-                select(coords);
-            }
         }
         else {
             if (coords == moveFrom.value && game['jumpsonly'] == 0) {
-                fromSquare.style.backgroundColor = "white";
+                document.getElementById("sq-" + moveFrom.value).style.backgroundColor = "white";    //Deselect from square
                 moveFrom.value = "null";
                 moveTo.value = "null";
             }
@@ -202,6 +204,7 @@ function Move(from, to){
     game['board'][from] = emptyPiece;
     var dist = from - to;
 
+
     if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
         game['board'][to].king = "True";
     }
@@ -214,7 +217,9 @@ function Move(from, to){
         if(pieceHasJump(to)){
             game['jumpsonly'] = 1;
             sessionStorage.setItem('gameObj', JSON.stringify(game));
-            cpuTurn();
+            if(game['board'][to].color === "red"){ //was it the cpus turn?
+                cpuTurn();
+            }
         }
         else {
             endTurn();
@@ -325,8 +330,30 @@ function leavePhase() {
     updateBoardHTML();
 }
 
-function cpuTurn(){
-    //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move.
+function miniMax(board, depth, score){
+    for (i = 10; i < 81; i++) {
+        if(game['board'][i].color === "red") {
+            if(i < 63) { //prevents off-board jump attempt for cpu pieces on the first rank
+                if (attemptMove(i, (parseFloat(i) + 16))) {
+                    return true;
+                }
+                else if (attemptMove(i, (parseFloat(i) + 20))) {
+                    return true;
+                }
+            }
+            if(game['board'][i].king === "True") {
+                if (attemptMove(i, (parseFloat(i) - 16))) {
+                    return true;
+                }
+                else if (attemptMove(i, (parseFloat(i) - 20))) {
+                    return true;
+                }
+            }
+        }
+    }
+}
+
+function merciless(){
     for (i = 10; i < 81; i++) {
         if(game['board'][i].color === "red") {
             if(i < 63) { //prevents off-board jump attempt for cpu pieces on the first rank
@@ -356,6 +383,14 @@ function cpuTurn(){
                 return true;
             }
         }
+    }
+    return false;
+}
+
+function cpuTurn(){
+    //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move.
+    if(merciless()){
+        return true;
     }
     return false;
 }

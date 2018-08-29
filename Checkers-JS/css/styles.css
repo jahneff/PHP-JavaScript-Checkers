@@ -25,6 +25,7 @@
     color: yellow;
     height: 10%;
     width: 10%;
+    background-clip: padding-box;
 }
 
 .boardsquareinner {
