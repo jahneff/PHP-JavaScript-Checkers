@@ -77,6 +77,9 @@ function newGame(){
     window.location.href = ("checkers.php");
 }
 
+function cpuAttemptMove(from, to){
+
+}
 
 function deselect() {
     var moveFrom = document.getElementById("moveFromCoords").value;
@@ -136,11 +139,6 @@ function arrayifyCoords(coords){ //Takes sq-# as an argument and returns only #
     return coords[0];
 }
 
-function separate(combo){
-    var arr = combo.split("-", 2);
-    return arr;
-}
-
 function inArray(needle, haystack) {
     var length = haystack.length;
     for(var i = 0; i < length; i++) {
@@ -150,9 +148,7 @@ function inArray(needle, haystack) {
 }
 
 function attemptMove(from, to){
-    alert("Doc has been updated");
     game = JSON.parse(sessionStorage.getItem('gameObj'));
-    alert(isLegalMove2(from, to));
     if(isLegalMove(from, to) && isMoversTurn(from)){
         animateMove(from, to);
         Move(from, to);
@@ -167,8 +163,7 @@ function attemptMove2(from, to){
     game = JSON.parse(sessionStorage.getItem('gameObj'));
     if(isLegalMove(from, to)){
         animateMove(from, to);
-        Move2(from, to);
-        sessionStorage.setItem('gameObj', JSON.stringify(game));
+        Move(from, to);
         return true;
     }
     else {
@@ -242,6 +237,7 @@ function Move(from, to){
     game['board'][from] = emptyPiece;
     var dist = from - to;
 
+
     if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
         game['board'][to].king = "True";
     }
@@ -264,37 +260,6 @@ function Move(from, to){
     }
     else {
         endTurn();
-    }
-}
-
-function Move2(from, to){
-    game['board'][to] = game['board'][from];
-    game['board'][from] = emptyPiece;
-    var dist = from - to;
-
-    if((to >= 10 && to <= 17) && game['board'][to].color === "black"){
-        game['board'][to].king = "True";
-    }
-    else if((to >= 73 && to <= 80) && game['board'][to].color === "red") {
-        game['board'][to].king = "True";
-    }
-
-    if(Math.abs(dist) > 10){
-        game['board'][(from - Math.floor(dist/2))] = emptyPiece;  //remove jumped piece from board
-        if(pieceHasJump(to)){
-            //game['jumpsonly'] = 1;
-            //sessionStorage.setItem('gameObj', JSON.stringify(game));
-            if(game['board'][to].color === "red"){ //was it the cpus turn?
-                //cpuTurn();
-            }
-        }
-        else {
-            //endTurn();
-        }
-    }
-    else {
-
-        //endTurn();
     }
 }
 
@@ -326,12 +291,11 @@ function moveBack(from, to){
                 sessionStorage.setItem('gameObj', JSON.stringify(game));
             }
             else {
-                //endTurn();
+                endTurn();
             }
     }
     else {
-        sessionStorage.setItem('gameObj', JSON.stringify(game));
-        //endTurn();
+        endTurn();
     }
 }
 
@@ -359,10 +323,6 @@ function isLegalMove(from, to){
     }
     var phase = game['jumpsonly'];
     var dist = from - to;
-    if(Math.abs(dist) > 10 && (from - Math.floor(dist / 2)) % 9 === 0){
-        return false;
-    }
-
     var movingPiece = game['board'][from];
     var jumpedPiece = game['board'][(from - Math.floor(dist / 2))];
     var redMoves = [-8, -10];
@@ -416,87 +376,6 @@ function isLegalMove(from, to){
 }
 
 
-function isLegalMove2(from, to){
-    if (to < 10 || to > 80 || ((to % 9) === 0)){ //is the space being moved to off the board?
-        alert("here1");
-        return false;
-    }
-
-    //maybe dont need this conditional. SHould be taken care of in switch statement below
-    if(game['board'][to]['color'] !== "none") { //is the space being moved to already occupied?
-        alert("here2");
-        alert(to);
-        alert(from);
-        return false;
-    }
-    var phase = game['jumpsonly'];
-    var dist = from - to;
-    if(Math.abs(dist) > 10 && (from - Math.floor(dist / 2)) % 9 === 0){
-        alert("here3");
-        return false;
-    }
-
-    var movingPiece = game['board'][from];
-    var jumpedPiece = game['board'][(from - Math.floor(dist / 2))];
-    var redMoves = [-8, -10];
-    var redJumps = [-16, -20];
-    var blackMoves = [8, 10];
-    var blackJumps = [16, 20];
-    var kingMoves = redMoves.concat(blackMoves);
-    var kingJumps= redJumps.concat(blackJumps);
-    switch(movingPiece.color){
-        case "red":
-            var moves;
-            if (movingPiece.king === "True") {
-                moves = kingMoves;
-                jumps = kingJumps;
-            }
-            else {
-                moves = redMoves;
-                jumps = redJumps;
-            }
-            //alert("distance: " + dist);
-            //alert("moves[0]:" + moves[0] + ", moves[1]:" + moves[1]);
-            //alert(inArray(dist, moves));
-            //alert(phase);
-            if (inArray(dist, moves) && phase == 0){
-                return true;
-            }
-            else if (inArray(dist, jumps) && jumpedPiece.color === "black") {
-                game['black']['pieceslost']++;
-                return true;
-            }
-            alert("here4");
-            return false;
-        case "black":
-            var moves;
-            if (movingPiece.king === "True") {
-                moves = kingMoves;
-                jumps = kingJumps;
-            }
-            else {
-                moves = blackMoves;
-                jumps = blackJumps;
-            }
-
-            if (inArray(dist, moves) && phase == 0){
-                return true;
-            }
-            else if (inArray(dist, jumps) && jumpedPiece.color === "red") {
-                game['red']['pieceslost']++;
-                return true;
-            }
-            alert("here5");
-
-            return false;
-        default: //clicked square has no piece
-            alert("here6");
-
-            return false;
-    }
-}
-
-
 function updateSquareHTML(square, i){
     if(square['color'] !== "none") {
         if(square['king'] === "True"){
@@ -515,9 +394,8 @@ function endTurn(){
     game['turn']++;
     game['jumpsonly'] = 0;
     sessionStorage.setItem('gameObj', JSON.stringify(game));
-    updateBoardHTML();
     if ((game['turn'] % 2 != 1)) {
-        setTimeout(cpuTurn, 3000);
+        //setTimeout(cpuTurn, 3000);
     }
 }
 
@@ -531,10 +409,10 @@ function leavePhase() {
 
 
 function runMiniMax() {
-    //endTurn();
+    endTurn();
     var board = game['board'];
-    var arry = separate(miniMax(board, 0, 0));
-    return arry;
+    miniMax(board, 0, 0);
+    return 0;
 }
 
 function getScore(board) {
@@ -555,13 +433,13 @@ function getScore(board) {
 function modifyScore(colorToMove, score, tempscore){
     if(colorToMove === "red"){
         if((tempscore) > score){
-            //alert("new score: " + tempscore);
+            alert("new score: " + tempscore);
             return tempscore;
         }
     }
     if(colorToMove === "black"){
         if((tempscore) < score){
-            //alert("new score: " + tempscore);
+            alert("new score: " + tempscore);
             return tempscore;
         }
     }
@@ -572,177 +450,106 @@ function modifyScore(colorToMove, score, tempscore){
 
 function miniMax(board, depth, score){
     //var originalBoard = board;
-
     game = JSON.parse(sessionStorage.getItem('gameObj'));
     board = game['board'];
-    score = getScore(board);
-    if(depth === 2){ //this is an end node
-       // alert("depth == 4, current score: " + score);
-        if(score !== 0) {
-            //alert("returning " + score + " depth: " + depth);
-        }
-        return score;
-    }
 
+    score = getScore(board);
     var tempscore = score;
     var tempto = 0;
     var tempfrom = 0;
-    if(((depth + game['turn']) % 2) === 0){
+    if(depth === 2){
+       // alert("depth == 4, current score: " + score);
+        return score;
+    }
+    if((depth % 2) === 0){
         var colorToMove = "red";
         var flip = 1;   //changes movement direction based on team moving
-        var tempscore2 = -10000;
     }
     else {
         var colorToMove = "black";
         var flip = -1;
-        var tempscore2 = 10000;
-
     }
     //alert("Minimax called. Depth: " + depth + ", board score: " + score + ", color to move: " + colorToMove);
     //alert("depth going in: " + depth);
 
-    for (var i = 10; i < 82; i++) {
-        if(i === 81){
-            //alert("returning " + tempscore2 + " depth: " + depth);
-            return tempscore2;
-        }
+
+    for (var i = 10; i < 81; i++) {
         if(board[i].color === colorToMove) {
             var num1 = 16 * flip;
             var num2 = 20 * flip;
             var num3 = 8 * flip;
             var num4 = 10 * flip;
-            if(board[i].king === "True") {
-                if (isLegalMove(i, parseFloat(i) + (num1 * -1))) {
-                    attemptMove2(i, parseFloat(i) + num1);
-                    updateBoardHTML();
-                    tempscore = miniMax(board, parseFloat(depth) + 1, score);
-                    if (colorToMove === "red" && tempscore > tempscore2) {
-                        tempfrom = i;
-                        tempto = parseFloat(i) + num1;
-                        tempscore2 = modifyScore(colorToMove, score, tempscore);
-                    }
-                    else if (colorToMove === "black" && tempscore < tempscore2) {
-                        tempfrom = i;
-                        tempto = parseFloat(i) + num1;
-                        tempscore2 = modifyScore(colorToMove, score, tempscore);
-                    }
-
-                    moveBack(parseFloat(i) + num1, i);
-                    updateBoardHTML();
-                }
-                if (isLegalMove(i, parseFloat(i) + (num2 * -1))) {
-                    attemptMove2(i, parseFloat(i) + num2);
-                    updateBoardHTML();
-                    tempscore = miniMax(board, parseFloat(depth) + 1, score);
-                    if (colorToMove === "red" && tempscore > tempscore2) {
-                        tempfrom = i;
-                        tempto = parseFloat(i) + num2;
-                        tempscore2 = modifyScore(colorToMove, score, tempscore);
-                    }
-                    else if (colorToMove === "black" && tempscore < tempscore2) {
-                        tempfrom = i;
-                        tempto = parseFloat(i) + num2;
-                        tempscore2 = modifyScore(colorToMove, score, tempscore);
-                    }
-
-                    moveBack(parseFloat(i) + num2, i);
-                    updateBoardHTML();
-                }
-
-            }
+            console.log("depth: " + depth + ", i: " + i + ", color to move: " + colorToMove);
 
             if (isLegalMove(i, (parseFloat(i) + num1))) {
-                //console.log("depth: " + depth + ", " + colorToMove + "moves from: " + i + " to " + (parseFloat(i) + num1));
+                console.log("1");
                 attemptMove2(i, parseFloat(i) + num1);
+                updateBoardHTML();
                 tempscore = miniMax(board, parseFloat(depth)+1, score);
-                if(colorToMove === "red" && tempscore > tempscore2){
+                if(tempscore > (score * flip)){
                     tempfrom = i;
                     tempto = parseFloat(i) + num1;
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
-                }
-                else if(colorToMove === "black" && tempscore < tempscore2){
-                    tempfrom = i;
-                    tempto = parseFloat(i) + num1;
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
-                }
+                    alert("tempscore: " + tempscore + " score: " + score + " tempfrom: " + tempfrom + " tempto: " + tempto);
+                    score = modifyScore(colorToMove, score, tempscore);
 
+                }
                 moveBack(parseFloat(i) + num1, i);
+                updateBoardHTML();
             }
-
             if (isLegalMove(i, (parseFloat(i) + num2))){
-                //console.log("depth: " + depth + ", " + colorToMove + "moves from: " + i + " to " + (parseFloat(i) + num2));
+                console.log("2");
+
                 attemptMove2(i, parseFloat(i) + num2);
+                updateBoardHTML();
                 tempscore = miniMax(board, parseFloat(depth)+1, score);
-                if(colorToMove === "red" && tempscore > tempscore2){
+                if(tempscore > (score * flip)){
                     tempfrom = i;
                     tempto = parseFloat(i) + num2;
-                    //alert("New tempscore: " + tempscore + " depth: " + depth + ", move from: " + tempfrom + " to: " + tempto);
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
-                }
-                else if(colorToMove === "black" && tempscore < tempscore2){
-                    //alert("4: tempscore " + tempscore + "tempscore2: " + tempscore2 + " depth: " + depth);
+                    alert("tempscore: " + tempscore + " score: " + score + " tempfrom: " + tempfrom + " tempto: " + tempto);
+                    score = modifyScore(colorToMove, score, tempscore);
 
-                    tempfrom = i;
-                    tempto = parseFloat(i) + num2;
-                    //alert("New tempscore: " + tempscore + " depth: " + depth + ", move from: " + tempfrom + " to: " + tempto);
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
                 }
-
                 moveBack(parseFloat(i) + num2, i);
+                updateBoardHTML();
             }
             if (isLegalMove(i, (parseFloat(i) + num3))) {
-                //console.log("depth: " + depth + ", " + colorToMove + "moves from: " + i + " to " + (parseFloat(i) + num3));
+                console.log("3");
                 attemptMove2(i, parseFloat(i) + num3);
+                updateBoardHTML();
                 tempscore = miniMax(board, parseFloat(depth)+1, score);
-                if(colorToMove === "red" && tempscore > tempscore2){
-                    //alert("5: tempscore " + tempscore + "tempscore2: " + tempscore2);
-
+                if(tempscore > (score * flip)){
                     tempfrom = i;
                     tempto = parseFloat(i) + num3;
-                    //alert("New tempscore: " + tempscore + " depth: " + depth + ", move from: " + tempfrom + " to: " + tempto);
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
-                }
-                else if(colorToMove === "black" && tempscore < tempscore2){
-                    //alert("6: tempscore " + tempscore + "tempscore2: " + tempscore2 + " depth: " + depth);
+                    score = modifyScore(colorToMove, score, tempscore);
 
-                    tempfrom = i;
-                    tempto = parseFloat(i) + num3;
-                    //alert("New tempscore: " + tempscore + " depth: " + depth + ", move from: " + tempfrom + " to: " + tempto);
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
                 }
-
 
                 moveBack(parseFloat(i) + num3, i);
+                updateBoardHTML();
             }
-                if (isLegalMove(i, (parseFloat(i) + num4))) {
-                //console.log("depth: " + depth + ", " + colorToMove + "moves from: " + i + " to " + (parseFloat(i) + num4));
+            if (isLegalMove(i, (parseFloat(i) + num4))) {
+                console.log("4");
+
                 attemptMove2(i, parseFloat(i) + num4);
+                updateBoardHTML();
                 tempscore = miniMax(board, parseFloat(depth)+1, score);
-                if(colorToMove === "red" && tempscore > tempscore2){
+                if(tempscore > (score * flip)){
                     tempfrom = i;
                     tempto = parseFloat(i) + num4;
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
-                }
-                else if(colorToMove === "black" && tempscore < tempscore2){
-                    tempfrom = i;
-                    tempto = parseFloat(i) + num4;
-                    tempscore2 = modifyScore(colorToMove, score, tempscore);
+                    score = modifyScore(colorToMove, score, tempscore);
                 }
 
-
-
+                //alert(colorToMove + " moves back from: " + (parseFloat(i) + num4) + ", to: " + i + ", depth: " + depth);
                 moveBack(parseFloat(i) + num4, i);
+                updateBoardHTML();
             }
 
         }
         if(depth === 0 && i === 80){
             //attemptMove()
-            alert("best possible score at 0 for " + colorToMove + ": " + tempscore);
-            alert("best possible move for " + colorToMove + " : from : " + tempfrom + " to : " + tempto);
-            //alert("returning now");
-            return (tempfrom + "-" + tempto);
+            alert("best possible score after 4:" + score);
+            alert("best possible move: from : " + tempfrom + " to : " + tempto);
         }
-
     }
 
     //alert("returning " + score);
@@ -786,9 +593,11 @@ function miniMaxMoveBack(board, from, to){
 
     if(Math.abs(dist) > 10){
         if(board[from].color === "red" && board[(from - Math.floor(dist/2))].color === "none") {
+            alert("here");
             board[(from - Math.floor(dist / 2))].color = "black";  //remove jumped piece from board
         }
         else if(board[from].color === "black" && board[(from - Math.floor(dist/2))].color === "none") {
+            alert("here");
             board[(from - Math.floor(dist / 2))].color = "red";  //remove jumped piece from board
         }
     }
@@ -798,6 +607,7 @@ function miniMaxMoveBack(board, from, to){
 
 
 function merciless(){
+
     for (i = 10; i < 81; i++) {
         if(game['board'][i].color === "red") {
             if(i < 63) { //prevents off-board jump attempt for cpu pieces on the first rank
@@ -839,31 +649,9 @@ function merciless(){
     return false;
 }
 
-function cpuMove(from, to){
-    attemptMove(from, to);
-    return 0;
-}
-
 function cpuTurn(){
     //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move.
-    var bestmove;
-
-
-    alert("Calling minimax, please be patient...");
-    bestmove = runMiniMax();
-    //alert("Bestmove: " + bestmove[0] + "-" + bestmove[1]);
-    if(bestmove !== undefined){
-        //alert("Bestmove: " + bestmove);
-        if(attemptMove(bestmove[0], bestmove[1])){
-            alert("Move success... right?");
-            console.log(game);
-        }
-        else {
-            alert("Move failed");
-            alert(bestmove[0], bestmove[1]);
-            alert(isLegalMove(bestmove[0], bestmove[1]));
-            console.log(game);
-        }
+    if(miniMax()){
         return true;
     }
     else if(merciless()){
@@ -882,6 +670,7 @@ function updateBoardHTML2(board) {
 }
 
 function updateBoardHTML(){
+    //board = JSON.parse(sessionStorage.getItem('boardObj'));
     game = JSON.parse(sessionStorage.getItem('gameObj'));
     //Instantiate pieces on board
     var i = 0;
@@ -907,14 +696,19 @@ function updateBoardHTML(){
     document.getElementById("black-pieces-lost").innerHTML = "Black pieces lost: " + game['black']['pieceslost'];
     document.getElementById("current-turn").innerHTML = "Turn " + game['turn'];
     if(game['turn'] % 2 == 1){
-        document.getElementById("team-to-move").innerHTML = "Team to move: black";
+        document.getElementById("team-to-move").innerHTML = "black";
+        //no function is calles, but this is the player's turn.
     }
     else {
-        document.getElementById("team-to-move").innerHTML = "Team to move: red";
+        document.getElementById("team-to-move").innerHTML = "red";
+        //if(cpuTurn() === "False"){ //cpuTurn will recursively call updateboardHTML
+        //   alert("No move available for CPU!");
+        //}
     }
     document.getElementById("jumps-only").innerHTML = "Turnphase " + game['jumpsonly'];
+    //console.log(game);
 }
 
 $( document ).ready(function() {
-    //console.log(JSON.parse(sessionStorage.getItem('gameObj')));
+    console.log(JSON.parse(sessionStorage.getItem('gameObj')));
 });

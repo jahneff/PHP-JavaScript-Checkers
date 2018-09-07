@@ -1,0 +1,59 @@
+.boardwrapper{
+    position: relative;
+    text-align: center;
+    height: 400px;
+    width: 400px;
+    border: 1px solid red;
+}
+
+.boardwrapper-mini{
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    font-size: 50%;
+}
+
+.board{
+    color: green;
+    height: 100%;
+    width: 100%;
+}
+
+.boardsquare{
+    position: relative;
+    border: 1px solid blue;
+    color: yellow;
+    height: 10%;
+    width: 10%;
+    background-clip: padding-box;
+}
+
+.boardsquareinner {
+    background-color: purple;
+    height: 10%;
+    width: 10%;
+}
+
+body {
+    background-color: rgb(32, 32, 32) !important;
+}
+
+.infobox{
+    margin-top: 50px;
+}
+
+.header{
+    font-size: 300%;
+    margin: 0 auto;
+    text-align: center;
+}
+.header-wrap{
+}
+
+.playerdata{
+    width: 30%;
+    display: inline-block;
+    border: 1px solid blanchedalmond;
+    margin: 5% 5%;
+    background-color: silver;
+}

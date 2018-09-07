@@ -37,23 +37,3 @@ function deselect(coords) {
         document.getElementById(coords).style.backgroundColor = "white";
     }
 }
-
-function moveIsJump (from, to) {
-    //if a move has a distance > 10, it must be a jump. Returns boolean
-    return (Math.abs(getDistance(from, to)) > 10)
-}
-
-function minimaxScenario1(){
-    select(58);
-    select(48);
-    select(34);
-    select(42);
-    select(68);
-    select(58);
-    select(28);
-    select(38);
-    select(58);
-    select(50);
-    select(26);
-    select(34);
-}

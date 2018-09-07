@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 
     <script src="../js/jquery-2.2.4.min.js"></script>
-    <script src="../js/checkers.js"></script>
+    <script src="../js/checkers2.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
     <nav class="navbar  navbar-dark bg-primary sticky-top" style="margin-bottom: 0px; background-color: #5cb85c;">
         <a class="navbar-brand" href="#" style="color: white;"><b>Checkers</b></a>
@@ -94,11 +94,14 @@
             <form id="movedata">
                 <input type="text" id="moveFromCoords" value="null"/>
                 <input type="text" id="moveToCoords" value="null"/>
+
                 <input type="button" onclick="newGame()" value="New game" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="leavePhase()" value="End Turn" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="cpuTurn()" value="CPUturn" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="runMiniMax()" value="Run Minimax" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="minimaxScenario1()" value="Minimax scenario 1" style="border: 1px solid black; height: 20px; width: 100px;"/>
+                <input type="button" onclick="test()" value="Run Tests" style="border: 1px solid black; height: 20px; width: 100px;"/>
+
 
 
 
