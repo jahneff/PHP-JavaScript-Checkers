@@ -10,7 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4740787">
+    <splitter split-orientation="horizontal" split-proportion="0.4934416">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="phpoddsnends.php" pinned="false" current-in-tab="false">
@@ -26,7 +26,7 @@
           <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/css/styles.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="680">
+                <state relative-caret-position="328">
                   <caret line="40" column="21" lean-forward="false" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
                   <folding />
                 </state>
@@ -46,17 +46,16 @@
           <file leaf-file-name="checkers.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/checkers.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="123" column="30" lean-forward="false" selection-start-line="123" selection-start-column="30" selection-end-line="123" selection-end-column="30" />
+                <state relative-caret-position="4726">
+                  <caret line="343" column="0" lean-forward="true" selection-start-line="343" selection-start-column="0" selection-end-line="343" selection-end-column="0" />
                   <folding>
-                    <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
                     <element signature="n#!!block;n#separate#0" expanded="false" />
                     <element signature="n#!!block;n#inArray#0" expanded="false" />
                     <element signature="n#!!block;n#pieceHasJump#0" expanded="false" />
-                    <element signature="e#21888#22269#0" expanded="false" />
-                    <marker date="1537666161311" expanded="true" signature="13661:13712" ph="..." />
-                    <marker date="1537666161311" expanded="true" signature="13860:13891" ph="..." />
-                    <marker date="1537666161311" expanded="true" signature="13860:13934" ph="..." />
+                    <element signature="e#21195#21576#0" expanded="false" />
+                    <marker date="1537460965510" expanded="true" signature="13142:13193" ph="..." />
+                    <marker date="1537460965510" expanded="true" signature="13341:13372" ph="..." />
+                    <marker date="1537460965510" expanded="true" signature="13341:13415" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -67,7 +66,10 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="612">
                   <caret line="36" column="42" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
-                  <folding />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#nav#0;n#head#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -76,7 +78,7 @@
             <entry file="file://$PROJECT_DIR$/src/checkers2.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1496">
-                  <caret line="88" column="20" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
+                  <caret line="88" column="20" lean-forward="true" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
@@ -85,8 +87,8 @@
           <file leaf-file-name="oddsnends.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/oddsnends.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="782">
-                  <caret line="46" column="7" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="58" selection-end-column="1" />
+                <state relative-caret-position="549">
+                  <caret line="46" column="7" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="58" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -95,7 +97,7 @@
           <file leaf-file-name="checkers2.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/checkers2.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="5372">
+                <state relative-caret-position="238">
                   <caret line="316" column="6" lean-forward="false" selection-start-line="315" selection-start-column="0" selection-end-line="365" selection-end-column="5" />
                   <folding>
                     <element signature="n#!!block;n#isLegalMove2#0" expanded="false" />
@@ -111,7 +113,7 @@
           <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="72828">
+                <state relative-caret-position="-116">
                   <caret line="4284" column="0" lean-forward="false" selection-start-line="4284" selection-start-column="0" selection-end-line="4284" selection-end-column="0" />
                   <folding />
                 </state>
@@ -135,29 +137,12 @@
           <file leaf-file-name="checkers.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/checkers.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-48">
-                  <caret line="73" column="90" lean-forward="false" selection-start-line="73" selection-start-column="90" selection-end-line="73" selection-end-column="90" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="timer.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/timer.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1530">
-                  <caret line="90" column="31" lean-forward="false" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="timer.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/js/timer.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
-                  <folding />
+                <state relative-caret-position="391">
+                  <caret line="119" column="54" lean-forward="false" selection-start-line="119" selection-start-column="54" selection-end-line="119" selection-end-column="54" />
+                  <folding>
+                    <element signature="n#style#0;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -168,6 +153,16 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>Move2</find>
+      <find>ismover</find>
+      <find>islegalmove</find>
+      <find>isMover</find>
+      <find>min</find>
+      <find>miniMax</find>
+      <find>at</find>
+      <find>attemptMov</find>
+      <find>jumpsonl</find>
+      <find>attemp</find>
       <find>ismov</find>
       <find>jumpson</find>
       <find>length</find>
@@ -180,24 +175,14 @@
       <find>phase</find>
       <find>anima</find>
       <find>alert</find>
+      <find>cpuTurn</find>
+      <find>cpuT</find>
       <find>clearInt</find>
       <find>king</find>
       <find>king = &quot;F</find>
       <find>king = &quot;f</find>
       <find>navbar-brand:</find>
       <find>moveBac</find>
-      <find>updat</find>
-      <find>playerM</find>
-      <find>Move</find>
-      <find>cpuTurn</find>
-      <find>playerMove</find>
-      <find>realMove</find>
-      <find>select(</find>
-      <find>set</find>
-      <find>realMo</find>
-      <find>cpuT</find>
-      <find>selected</find>
-      <find>attemptMo</find>
     </findStrings>
     <replaceStrings>
       <replace>from, to</replace>
@@ -210,13 +195,11 @@
         <option value="$PROJECT_DIR$/src/checkers2.php" />
         <option value="$PROJECT_DIR$/js/oddsnends.js" />
         <option value="$PROJECT_DIR$/js/checkers2.js" />
+        <option value="$PROJECT_DIR$/js/checkers.js" />
         <option value="$PROJECT_DIR$/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/css/styles.css" />
         <option value="$PROJECT_DIR$/src/home.php" />
-        <option value="$PROJECT_DIR$/src/timer.php" />
-        <option value="$PROJECT_DIR$/js/timer.js" />
         <option value="$PROJECT_DIR$/src/checkers.php" />
-        <option value="$PROJECT_DIR$/js/checkers.js" />
       </list>
     </option>
   </component>
@@ -234,7 +217,7 @@
     <option name="height" value="998" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -247,7 +230,36 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Checkers0.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Checkers0.1" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Checkers0.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Checkers0.1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Checkers0.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Checkers0.1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Checkers0.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Checkers0.1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -298,22 +310,21 @@
       <workItem from="1535752531637" duration="122024000" />
       <workItem from="1536695129029" duration="2519000" />
       <workItem from="1536957008485" duration="10718000" />
-      <workItem from="1537213071189" duration="77394000" />
-      <workItem from="1537649049729" duration="12481000" />
+      <workItem from="1537213071189" duration="71087000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="370669000" />
+    <option name="totallyTimeSpent" value="351881000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1016" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16614583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16614583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16943522" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -329,26 +340,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16614583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -363,6 +354,41 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/js/checkers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3757">
+          <caret line="221" column="32" lean-forward="false" selection-start-line="221" selection-start-column="32" selection-end-line="221" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!block;n#separate#0" expanded="false" />
+            <element signature="n#!!block;n#inArray#0" expanded="false" />
+            <element signature="n#!!block;n#pieceHasJump#0" expanded="false" />
+            <element signature="e#21195#21576#0" expanded="false" />
+            <marker date="1537460965510" expanded="true" signature="13142:13193" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13372" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13415" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/checkers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="178" lean-forward="false" selection-start-line="18" selection-start-column="178" selection-end-line="18" selection-end-column="178" />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/phpoddsnends.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -423,14 +449,13 @@
         <state relative-caret-position="5627">
           <caret line="331" column="21" lean-forward="false" selection-start-line="331" selection-start-column="21" selection-end-line="331" selection-end-column="21" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#pieceHasJump#0" expanded="false" />
-            <element signature="e#21888#22269#0" expanded="false" />
-            <marker date="1537666161311" expanded="true" signature="13661:13712" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13891" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13934" ph="..." />
+            <element signature="e#21195#21576#0" expanded="false" />
+            <marker date="1537460965510" expanded="true" signature="13142:13193" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13372" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13415" ph="..." />
           </folding>
         </state>
       </provider>
@@ -439,7 +464,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1139">
           <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -511,14 +539,13 @@
         <state relative-caret-position="2584">
           <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#pieceHasJump#0" expanded="false" />
-            <element signature="e#21888#22269#0" expanded="false" />
-            <marker date="1537666161311" expanded="true" signature="13661:13712" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13891" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13934" ph="..." />
+            <element signature="e#21195#21576#0" expanded="false" />
+            <marker date="1537460965510" expanded="true" signature="13142:13193" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13372" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13415" ph="..." />
           </folding>
         </state>
       </provider>
@@ -527,7 +554,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
           <caret line="54" column="12" lean-forward="false" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -599,14 +629,13 @@
         <state relative-caret-position="1377">
           <caret line="81" column="24" lean-forward="true" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#pieceHasJump#0" expanded="false" />
-            <element signature="e#21888#22269#0" expanded="false" />
-            <marker date="1537666161311" expanded="true" signature="13661:13712" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13891" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13934" ph="..." />
+            <element signature="e#21195#21576#0" expanded="false" />
+            <marker date="1537460965510" expanded="true" signature="13142:13193" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13372" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13415" ph="..." />
           </folding>
         </state>
       </provider>
@@ -615,7 +644,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1139">
           <caret line="67" column="21" lean-forward="false" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -664,14 +696,13 @@
         <state relative-caret-position="2856">
           <caret line="168" column="18" lean-forward="false" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#pieceHasJump#0" expanded="false" />
-            <element signature="e#21888#22269#0" expanded="false" />
-            <marker date="1537666161311" expanded="true" signature="13661:13712" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13891" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13934" ph="..." />
+            <element signature="e#21195#21576#0" expanded="false" />
+            <marker date="1537460965510" expanded="true" signature="13142:13193" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13372" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13415" ph="..." />
           </folding>
         </state>
       </provider>
@@ -707,6 +738,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/checkers2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1496">
+          <caret line="88" column="20" lean-forward="true" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/phpoddsnends.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -717,15 +756,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/oddsnends.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="7" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="58" selection-end-column="1" />
+        <state relative-caret-position="549">
+          <caret line="46" column="7" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="58" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/checkers2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5372">
+        <state relative-caret-position="238">
           <caret line="316" column="6" lean-forward="false" selection-start-line="315" selection-start-column="0" selection-end-line="365" selection-end-column="5" />
           <folding>
             <element signature="n#!!block;n#isLegalMove2#0" expanded="false" />
@@ -739,7 +778,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72828">
+        <state relative-caret-position="-116">
           <caret line="4284" column="0" lean-forward="false" selection-start-line="4284" selection-start-column="0" selection-end-line="4284" selection-end-column="0" />
           <folding />
         </state>
@@ -747,9 +786,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
+        <state relative-caret-position="328">
           <caret line="40" column="21" lean-forward="false" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/checkers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="119" column="54" lean-forward="false" selection-start-line="119" selection-start-column="54" selection-end-line="119" selection-end-column="54" />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#6;n#form#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -757,56 +807,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="36" column="42" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/checkers2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="88" column="20" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/timer.js" />
-    <entry file="file://$PROJECT_DIR$/src/timer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="90" column="31" lean-forward="false" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/timer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/checkers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-48">
-          <caret line="73" column="90" lean-forward="false" selection-start-line="73" selection-start-column="90" selection-end-line="73" selection-end-column="90" />
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#nav#0;n#head#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/checkers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="123" column="30" lean-forward="false" selection-start-line="123" selection-start-column="30" selection-end-line="123" selection-end-column="30" />
+        <state relative-caret-position="4726">
+          <caret line="343" column="0" lean-forward="true" selection-start-line="343" selection-start-column="0" selection-end-line="343" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#pieceHasJump#0" expanded="false" />
-            <element signature="e#21888#22269#0" expanded="false" />
-            <marker date="1537666161311" expanded="true" signature="13661:13712" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13891" ph="..." />
-            <marker date="1537666161311" expanded="true" signature="13860:13934" ph="..." />
+            <element signature="e#21195#21576#0" expanded="false" />
+            <marker date="1537460965510" expanded="true" signature="13142:13193" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13372" ph="..." />
+            <marker date="1537460965510" expanded="true" signature="13341:13415" ph="..." />
           </folding>
         </state>
       </provider>

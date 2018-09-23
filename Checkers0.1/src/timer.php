@@ -2,6 +2,22 @@
 
 <html lang="en" data-framework="intercoolerjs" xmlns="http://www.w3.org/1999/html">
 
+<?php
+    function printBoard8x8(){
+        for ($index = 9; $index <= 80; $index++){
+            if(($index % 9) == 0){
+                echo "<tr>";
+                $end = $index + 8;
+            }
+            else {
+                echo "<td id='sq-" . $index . "' class='boardsquare' onclick='selectHandle(this.id)'></td>";
+                if (($index % 8) == 80) {
+                    echo "</tr>";
+                }
+            }
+        }
+    }
+?>
 
 <head>
     <meta charset="utf-8">
@@ -11,7 +27,7 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 
     <script src="../js/jquery-2.2.4.min.js"></script>
-    <script src="../js/checkers.js"></script>
+    <script src="../js/timer.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
     <nav class="navbar navbar-dark bg-primary fixed-top sidebarNavigation" data style="margin-bottom: 0px; background-color: #3d9970;">
         <a class="navbar-brand" href="home.php"><b>Jack Neff</b></a>
@@ -21,8 +37,6 @@
             <a class="btn btn-primary" href="parameters.php?" role="button" style="background-color:#5cb85c; border-color: #ffffff; margin: 5% auto; font-size: 125%;"><b>Settings</b></a>
         </div>
     </nav>
-
-
 </head>
 
 <body>
@@ -65,57 +79,18 @@
             <div class="boardwrapper">
                 <table class="board">
                     <?php
-                    for ($index = 9; $index <= 80; $index++){
-                        if(($index % 9) == 0){
-                            echo "<tr>";
-                            $end = $index + 8;
-                        }
-                        else {
-                            echo "<td id='sq-" . $index . "' class='boardsquare' onclick='action(this.id)'></td>";
-                            if (($index % 8) == 80) {
-                                echo "</tr>";
-                            }
-                        }
-                    }
+                    printBoard8x8();
                     ?>
                 </table>
 
             </div>
-            <div class="boardwrapper-mini" style="margin-bottom: 2%";>
-                <table class="board" style="color:#c7ddef; width:100%; height:100%;">
-                    <?php
-                    for ($index = 0; $index <= 98; $index++){
-                        if(($index % 9) == 0){
-                            echo "<tr>";
-                            echo "<td id='tile" . $index . "' class='boardsquare' onclick='select(this.id)'></td>";
-                            $end = $index + 8;
-                        }
-                        else {
-                            echo "<td id='tile" . $index . "' class='boardsquare' onclick=''></td>";
-                            if (($index % 8) == $end) {
-                                echo "</tr>";
-                            }
-                        }
-                    }
-                    ?>
-                </table>
-            </div>
-            <div class="playerdata" id="playerdata" >
-                Player data:
-                <br>
-                <div id="black-pieces-lost"></div>
-            </div>
-            <div class="playerdata" id="cpudata">
-                CPU data:
-                <br>
-                <div id="red-pieces-lost"></div>
-            </div>
-            <div class="playerdata" id="gamedata">
-                Game data:
-                <br>
-                <div id="current-turn"></div>
-                <div id="team-to-move"></div>
-                <div id="jumps-only"></div>
+            <div class="timerwrapper" style ="background-color: darkslategray; padding: 5px; width: 50px;">
+                <div id="timer1">
+                    0:00
+                </div>
+                <div id="timer2">
+                    0:00
+                </div>
             </div>
             <form id="movedata" style="color: #2e6da4">
                 <input type="text" id="moveFromCoords" value="null"/>
@@ -127,19 +102,11 @@
                 <input type="button" onclick="minimaxScenario1()" value="Minimax scenario 1" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="createNewTestObject()" value="Testboard" style="border: 1px solid black; height: 20px; width: 100px;"/>
 
-
-
             </form>
-            <div id="winner">0</div>
-            <div id="i-at-1">0</div>
-            <div id="i-at-2">0</div>
-            <div id="i-at-3">0</div>
+            <input type="button" onclick="timer(10)" value="START TIMERS" style="border: 1px solid black; height: 20px; width: 100px;"/>
 
-
-            <h2 style="color:white;">If turn is odd, it is blacks move. If it is even, it is white's move.</h2>
         </div>
         <div class="col-md-2">
-            allo
         </div>
     </div>
 </div>

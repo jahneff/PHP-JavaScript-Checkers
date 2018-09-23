@@ -15,7 +15,7 @@ function Piece(color) {
 
 
 function createNewGameObject(){
-    var game = {red: {pieceslost: 0, winner: false}, black: {pieceslost: 0, winner: false}, board:[], tempboard:[], turn: 1, jumpsonly: 0, squaretomove: 0, selected: null};
+    var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], tempboard:[], turn: 1, jumpsonly: 0, squaretomove: 0};
     for (i = 0; i < 99; i++) {
         game['board'][i] = new Piece("none");
     }
@@ -60,7 +60,11 @@ function createNewTestObject(){
 
 
 
-window.onload = loadGame;
+window.onload = function(){
+    if(sessionStorage.getItem('gameObj') === null) {
+        createNewGameObject();
+    }
+    updateBoardHTML();
     /*
     -----------------------------------------
     Only spaces 10-89, excluding multiples of 9, are in play.
@@ -79,17 +83,11 @@ window.onload = loadGame;
     90      91 92 93 94 95 96 97 98
     -----------------------------------------
      */
-
-function loadGame(){
-    if(sessionStorage.getItem('gameObj') === null) {
-        createNewGameObject();
-    }
-    updateBoardHTML();
-}
+};
 
 function newGame(){
     sessionStorage.removeItem('gameObj');
-    loadGame();
+    window.location.href = ("checkers.php");
 }
 
 
@@ -115,69 +113,38 @@ function selectAfterJump(squareId){
     selectHandle(squareId);
 }
 
-function action(squareID){
-    var boardIndex = arrayifyCoords(squareID);
-    switch (select(boardIndex)){
-        case 1:
-            console.log("Square " + boardIndex + " selected.");
-            sessionStorage.setItem('gameObj', JSON.stringify(game));
-            updateBoardHTML();
-            break;
-        case 2:
-            console.log("Square " + boardIndex + " selected, move to it is legal.");
-            var from = game['moveFrom'];
-            var to = boardIndex;
-            if(isLegalMove(from, to)) {
-                playerMove(from, to);
-                sessionStorage.setItem('gameObj', JSON.stringify(game));
-                updateBoardHTML();
-                if(!jumpChain(from, to)){
-                    endTurn();
-                    cpuTurn();
-                    endTurn();
-                }
-            }
-            break;
-        default:
-            alert("select failed!");
-            break;
-    }
-    gameOver();
-}
-
-function jumpChain(from, to){
-    var moveDistance = Math.abs(from - to);
-    if(moveDistance > 10 && pieceHasJump(to)){
-        return true;
-    }
-    return false;
-}
-
-function gameOver(){
-    if(game['black']['pieceslost'] >= 12){
-        game['black']['winner'] = true;
-        document.getElementById("winner").innerHTML = "Black Wins!";
-    }
-    if(game['red']['pieceslost'] >= 12){
-        game['red']['winner'] = true;
-        document.getElementById("winner").innerHTML = "Red Wins!";
-    }
-}
-
 function select(coords){
-    var from = game['selected'];
+    var moveTo = document.getElementById("moveToCoords");
+    var moveFrom = document.getElementById("moveFromCoords");
     //alert(moveFrom.value + ", " + moveTo.value);
-    if(!from) {//MoveFrom has not been selected
-        game['selected'] = coords;                    //Update moveFrom form value
+    if(moveFrom.value === "null") {//MoveFrom has not been selected
+        moveFrom.value = coords;                    //Update moveFrom form value
         document.getElementById("sq-" + coords).style.backgroundColor = "orange";    //Select clicked square
-        return 1;
     }
 
-    else {
-        document.getElementById("sq-" + from).style.backgroundColor = "white";    //Deselect from square
-        game['moveFrom'] = game['selected'];                    //Update moveFrom form value
-        game['selected'] = null;
-        return 2;
+    else {                                          //MoveFrom already has a value. The user has now clicked on a square to move to.
+        moveTo.value = coords;                      //update moveTo form value
+        if(playerMove(moveFrom.value, moveTo.value)) {
+            document.getElementById("sq-" + moveFrom.value).style.backgroundColor = "white";    //Deselect from square
+            moveFrom.value = "null";
+            moveTo.value = "null";
+            //if (game['jumpsonly'] !== 0) {  //More jumps are available for moved piece
+             //   alert("here:" + coords);
+             //   select(coords); //Select clicked square
+            //}
+        }
+        else {
+            if (game['jumpsonly'] === 0) {
+                document.getElementById("sq-" + moveFrom.value).style.backgroundColor = "white";    //Deselect from square
+                moveFrom.value = "null";
+                moveTo.value = "null";
+            }
+            else {
+                moveTo.value = "null";
+            }
+
+        }
+
     }
 }
 
@@ -202,10 +169,10 @@ function inArray(needle, haystack) {
 
 //This function is for real moves that advance the game when successfully completed.
 function attemptMove(from, to){
-    //game = JSON.parse(sessionStorage.getItem('gameObj'));
+    game = JSON.parse(sessionStorage.getItem('gameObj'));
     if(isLegalMove(from, to) && isMoversTurn(from, game['turn'])){
-        //animateMove(from, to, realMove);
-        realMove(from, to);
+        animateMove(from, to, realMove);
+        //realMove(from, to);
         return true;
     }
     else {
@@ -308,6 +275,7 @@ function realMove(from, to){
     else if((to >= 73 && to <= 80) && game['board'][from].color === "red") {
         game['board'][from].king = "True";
     }
+
     game['board'][to] = game['board'][from];
     game['board'][from] = new Piece("none");
     var dist = from - to;
@@ -320,7 +288,14 @@ function realMove(from, to){
             game['jumpsonly'] = to;
             game['squaretomove'] = to;
             sessionStorage.setItem('gameObj', JSON.stringify(game));
+            continueTurn();
         }
+        else {
+            endTurn();
+        }
+    }
+    else {
+        endTurn();
     }
 }
 
@@ -459,12 +434,12 @@ function updateSquareHTML(square, i){
 
 function endTurn(){
     game['turn']++;
-    //game['jumpsonly'] = 0;
+    game['jumpsonly'] = 0;
     sessionStorage.setItem('gameObj', JSON.stringify(game));
     updateBoardHTML();
-    //if ((game['turn'] % 2 != 1)) {
-    //    setTimeout(cpuTurn, 1000);
-    //}
+    if ((game['turn'] % 2 != 1)) {
+        setTimeout(cpuTurn, 1000);
+    }
 }
 
 function continueTurn(){
@@ -665,34 +640,28 @@ function cpuTurn(){
     bestmove = runMiniMax();
     var size = bestmoveArray.from.length;
     var pos = 0;
-    for (var k = (size - 1); k >= 0; k--) {
-        if (!cpuMove(bestmoveArray.from[k], bestmoveArray.to[k])) { //Move()
-            alert("Move Failed");
+    var k = size - 1;
+    function frame() {
+        if(pos === (size * 5) || k < 0) {
+            clearInterval(id);
+        }
+        else if (pos % 5 === 0) {
+            if(!cpuMove(bestmoveArray.from[k], bestmoveArray.to[k])) { //Move()
+                alert("Move Failed");
+            }
+            k--;
+        }
+        pos++;
+
+    }
+    var id = setInterval(frame, 100);
+    /*for (var i = (size - 1); i >= 0; i--){
+        if(!cpuMove(bestmoveArray.from[i], bestmoveArray.to[i])){
+            alert("Move failed");
             return false;
         }
-        sessionStorage.setItem('gameObj', JSON.stringify(game));
-    }
-/*function frame() {
-    if(pos === (size * 5) || k < 0) {
-        clearInterval(id);
-    }
-    else if (pos % 5 === 0) {
-        if(!cpuMove(bestmoveArray.from[k], bestmoveArray.to[k])) { //Move()
-            alert("Move Failed");
-        }
-        k--;
-    }
-    pos++;
 
-}
-var id = setInterval(frame, 100);
-/*for (var i = (size - 1); i >= 0; i--){
-    if(!cpuMove(bestmoveArray.from[i], bestmoveArray.to[i])){
-        alert("Move failed");
-        return false;
-    }
-
-}*/
+    }*/
     if(bestmove.from.length === 0){
         alert("Move failed2");
         return false;

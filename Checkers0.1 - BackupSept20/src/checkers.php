@@ -71,7 +71,7 @@
                             $end = $index + 8;
                         }
                         else {
-                            echo "<td id='sq-" . $index . "' class='boardsquare' onclick='action(this.id)'></td>";
+                            echo "<td id='sq-" . $index . "' class='boardsquare' onclick='selectHandle(this.id)'></td>";
                             if (($index % 8) == 80) {
                                 echo "</tr>";
                             }
@@ -130,7 +130,7 @@
 
 
             </form>
-            <div id="winner">0</div>
+            <div id="i-at-0">0</div>
             <div id="i-at-1">0</div>
             <div id="i-at-2">0</div>
             <div id="i-at-3">0</div>
