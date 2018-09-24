@@ -126,7 +126,8 @@
                 <input type="button" onclick="runMiniMax()" value="Run Minimax" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="minimaxScenario1()" value="Minimax scenario 1" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="createNewTestObject()" value="Testboard" style="border: 1px solid black; height: 20px; width: 100px;"/>
-
+                <input type="button" onclick="gameOver('red')" value="Red Resign" style="border: 1px solid black; height: 20px; width: 100px;"/>
+                <input type="button" onclick="createNewTestObject()" value="Black Resign" style="border: 1px solid black; height: 20px;"/>
 
 
             </form>

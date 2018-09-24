@@ -15,7 +15,7 @@ function Piece(color) {
 
 
 function createNewGameObject(){
-    var game = {red: {pieceslost: 0, winner: false}, black: {pieceslost: 0, winner: false}, board:[], tempboard:[], turn: 1, jumpsonly: 0, squaretomove: 0, selected: null};
+    var game = {red: {pieceslost: 0, winner: false}, black: {pieceslost: 0, winner: false}, board:[], tempboard:[], turn: 1, jumpsonly: 0, squaretomove: 0, selected: null, mustJump: null};
     for (i = 0; i < 99; i++) {
         game['board'][i] = new Piece("none");
     }
@@ -92,20 +92,6 @@ function newGame(){
     loadGame();
 }
 
-
-function deselect() {
-    var moveFrom = document.getElementById("moveFromCoords").value;
-    if(moveFrom !== "null") {
-        document.getElementById("sq-" + moveFrom).style.backgroundColor = "white";
-        document.getElementById("moveFromCoords").value = "null";
-    }
-    var moveTo= document.getElementById("moveToCoords").value;
-    if(moveTo !== "null") {
-        document.getElementById("sq-" + moveTo).style.backgroundColor = "white";
-        document.getElementById("moveFromCoords").value = "null";
-    }
-}
-
 function selectHandle(squareId){
     var coords = arrayifyCoords(squareId);
     select(coords);
@@ -153,15 +139,25 @@ function jumpChain(from, to){
     return false;
 }
 
-function gameOver(){
-    if(game['black']['pieceslost'] >= 12){
+function gameOver(opts){
+        if(opts === "red"){
+            game['red']['pieceslost'] = 12;
+        }
+        else if(opts === "black"){
+            game['black']['pieceslost'] = 12;
+        }
+
+    if(game['red']['pieceslost'] >= 12){
         game['black']['winner'] = true;
         document.getElementById("winner").innerHTML = "Black Wins!";
+        return true;
     }
-    if(game['red']['pieceslost'] >= 12){
+    if(game['black']['pieceslost'] >= 12){
         game['red']['winner'] = true;
         document.getElementById("winner").innerHTML = "Red Wins!";
+        return true;
     }
+    return false;
 }
 
 function select(coords){
@@ -301,15 +297,20 @@ function animateMove(from, to, callbackFunc) {
     }
 }
 
-function realMove(from, to){
+function kingHandle(from, to){
     if((to >= 10 && to <= 17) && game['board'][from].color === "black"){
         game['board'][from].king = "True";
     }
     else if((to >= 73 && to <= 80) && game['board'][from].color === "red") {
         game['board'][from].king = "True";
     }
+}
+
+function realMove(from, to){
+    kingHandle(from, to);
     game['board'][to] = game['board'][from];
     game['board'][from] = new Piece("none");
+    game['mustJump'] = null;
     var dist = from - to;
 
     if(Math.abs(dist) > 11){
@@ -317,9 +318,7 @@ function realMove(from, to){
         game[jumpedPieceColor]['pieceslost']++;
         game['board'][(from - Math.floor(dist/2))] = new Piece("none");  //remove jumped piece from board
         if(pieceHasJump(to)){
-            game['jumpsonly'] = to;
-            game['squaretomove'] = to;
-            sessionStorage.setItem('gameObj', JSON.stringify(game));
+            game['mustJump'] = to;
         }
     }
 }
@@ -386,25 +385,44 @@ function isMoversTurn(from, turn){
     return false;
 }
 
-function isLegalMove(from, to){
+function moveIsOnBoard(from, to){
     var dist = from - to;
-    if (to < 10 || to > 80 || ((to % 9) === 0)){ return false; } //is this move off the board
-    if(game['board'][to]['color'] !== "none") { return false; }//is the space being moved to already occupied?
-    if(Math.abs(dist) > 10 && (from - Math.floor(dist / 2)) % 9 === 0){ return false; } //is the move a jump that wraps around the board?
+    if (to < 10 || to > 80 || ((to % 9) === 0)){
+        return false;
+    } //is this move off the board
+    if(Math.abs(dist) > 10 && (from - Math.floor(dist / 2)) % 9 === 0){
+        return false;
+    } //is the move a jump that wraps around the board?
+    return true;
+}
 
-
-    var phase = game['jumpsonly'];
-
+function isLegalMove(from, to){
+    var signedDist = from - to;
     var movingPiece = game['board'][from];
-    var jumpedPiece = game['board'][(from - Math.floor(dist / 2))];
+    var jumpedPiece = game['board'][(from - Math.floor(signedDist / 2))];
+
+    if(!moveIsOnBoard(from , to)){
+        return false;
+    }
+    if(game['mustJump'] != null){
+        if(game['mustJump'] != from || Math.abs(signedDist) <= 10){
+                console.log("piece at " + game['mustJump'] + " must jump");
+                return false;
+        }
+    }
+    if(game['board'][to]['color'] !== "none") {
+        return false;
+    }//is the space being moved to already occupied?
+
+
 
     if(movingPiece.king === "True"){
         var moves = [-8, -10, 8, 10];
         var jumps = [-16, -20, 16, 20];
-        if (inArray(dist, moves)){
+        if (inArray(signedDist, moves)){
             return true;
         }
-        else if (inArray(dist, jumps) &&
+        else if (inArray(signedDist, jumps) &&
             ((movingPiece.color === "red" && jumpedPiece.color === "black") ||
                 (movingPiece.color === "black" && jumpedPiece.color === "red"))) {
             return true;
@@ -417,10 +435,10 @@ function isLegalMove(from, to){
             var moves = [-8, -10];
             var jumps = [-16, -20];
 
-            if (inArray(dist, moves)){
+            if (inArray(signedDist, moves)){
                 return true;
             }
-            else if (inArray(dist, jumps) && jumpedPiece.color === "black") {
+            else if (inArray(signedDist, jumps) && jumpedPiece.color === "black") {
                 return true;
             }
             else { return false; }
@@ -428,10 +446,10 @@ function isLegalMove(from, to){
             var moves = [8, 10];
             var jumps = [16, 20];
 
-            if (inArray(dist, moves)){
+            if (inArray(signedDist, moves)){
                 return true;
             }
-            else if (inArray(dist, jumps) && jumpedPiece.color === "red") {
+            else if (inArray(signedDist, jumps) && jumpedPiece.color === "red") {
                 return true;
             }
             else { return false; }
@@ -459,7 +477,6 @@ function updateSquareHTML(square, i){
 
 function endTurn(){
     game['turn']++;
-    //game['jumpsonly'] = 0;
     sessionStorage.setItem('gameObj', JSON.stringify(game));
     updateBoardHTML();
     //if ((game['turn'] % 2 != 1)) {
@@ -482,12 +499,6 @@ function continueTurn(){
     }
 }
 
-function leavePhase() {
-    endTurn();
-    deselect();
-    updateBoardHTML();
-}
-
 
 
 
@@ -508,7 +519,7 @@ function getScore(board) {
             score++;
         }
         else if (board[i].color === "black") {
-            score = score - 1;
+            score--;
         }
     }
 
@@ -531,7 +542,7 @@ function isLegalJumpsOnlyMove(jumpsonly, toMove, from, to){
 function miniMax(depth, jumpsonly, from, to){
     game = JSON.parse(sessionStorage.getItem('gameObj'));
     board = game['board'];
-    if(depth === 2){
+    if(depth === 4){
         var returnval = {score: 0, to: to, from: from, moveIsInitialized: false};
         returnval.score = getScore(board);
         return returnval;
@@ -541,9 +552,6 @@ function miniMax(depth, jumpsonly, from, to){
     var tempval = {score: 0, to: [], from: [], moveIsInitialized: false};
     var returnval = {score: 0, to: [], from: [], moveIsInitialized: false};
     returnval.score = score;
-
-
-
 
     var moves = [8, 10, 16, 20, -8, -10, -16, -20];
     for (var i = 10; i <= 81; i++){
