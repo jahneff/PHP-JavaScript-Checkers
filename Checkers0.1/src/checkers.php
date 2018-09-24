@@ -63,6 +63,8 @@
         </div>
         <div class="col-md-8">
             <div class="boardwrapper">
+                <div id="winner" style="font-size: 250%;"></div>
+
                 <table class="board">
                     <?php
                     for ($index = 9; $index <= 80; $index++){
@@ -100,15 +102,15 @@
                     ?>
                 </table>
             </div>
-            <div class="playerdata" id="playerdata" >
-                Player data:
+            <div class="playerdata" id="playerdata" style="background-color: rosybrown; text-align: center; width: 130px;">
+                Black pieces lost:
                 <br>
-                <div id="black-pieces-lost"></div>
+                <div id="black-pieces-lost" style="font-size: 200%; color: black;"></div>
             </div>
-            <div class="playerdata" id="cpudata">
-                CPU data:
+            <div class="playerdata" id="cpudata" style="background-color: rosybrown; text-align: center; width: 130px;">
+                Red pieces lost:
                 <br>
-                <div id="red-pieces-lost"></div>
+                <div id="red-pieces-lost" style="font-size: 200%; color: red;"></div>
             </div>
             <div class="playerdata" id="gamedata">
                 Game data:
@@ -128,6 +130,7 @@
                 <input type="button" onclick="createNewTestObject()" value="Testboard" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="gameOver('red')" value="Red Resign" style="border: 1px solid black; height: 20px; width: 100px;"/>
                 <input type="button" onclick="createNewTestObject()" value="Black Resign" style="border: 1px solid black; height: 20px;"/>
+                <input type="button" onclick="createNewTestObject2()" value="No movs test" style="border: 1px solid black; height: 20px;"/>
 
 
             </form>

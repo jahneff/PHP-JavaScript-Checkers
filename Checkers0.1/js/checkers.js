@@ -58,7 +58,44 @@ function createNewTestObject(){
     alert("New board object stored in sessionStorage");
 }
 
+function createNewTestObject2(){
+    sessionStorage.removeItem('gameObj');
 
+    var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], tempboard:[], turn: 1, jumpsonly: 0, squaretomove: 0};
+    for (i = 0; i < 99; i++) {
+        game['board'][i] = new Piece("none");
+    }
+
+
+    game['board'][16].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][20].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][22].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][24].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][26].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][28].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][30].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][32].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][34].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][38].color = "red"; //would be placed off the board, in the hidden column
+    game['board'][42].color = "red"; //would be placed off the board, in the hidden column
+
+    game['board'][40].color = "black"; //would be placed off the board, in the hidden column
+    game['board'][44].color = "black"; //would be placed off the board, in the hidden column
+    game['board'][46].color = "black"; //would be placed off the board, in the hidden column
+    game['board'][48].color = "black"; //would be placed off the board, in the hidden column
+
+    game['board'][50].color = "black"; //would be placed off the board, in the hidden column
+    game['board'][52].color = "black"; //would be placed off the board, in the hidden column
+    game['board'][56].color = "black"; //would be placed off the board, in the hidden column
+
+    game['board'][58].color = "black"; //would be placed off the board, in the hidden column
+    game['board'][62].color = "black"; //would be placed off the board, in the hidden column
+    game['board'][78].color = "black"; //would be placed off the board, in the hidden column
+
+    sessionStorage.setItem('gameObj', JSON.stringify(game));
+    updateBoardHTML();
+    alert("New board object stored in sessionStorage");
+}
 
 window.onload = loadGame;
     /*
@@ -110,18 +147,28 @@ function action(squareID){
             updateBoardHTML();
             break;
         case 2:
-            console.log("Square " + boardIndex + " selected, move to it is legal.");
             var from = game['moveFrom'];
             var to = boardIndex;
             if(isLegalMove(from, to)) {
+                console.log("Square " + boardIndex + " selected, move to it is legal.");
                 playerMove(from, to);
                 sessionStorage.setItem('gameObj', JSON.stringify(game));
                 updateBoardHTML();
                 if(!jumpChain(from, to)){
                     endTurn();
-                    cpuTurn();
+                    if(teamHasMove("red")){     //will need to change later if CPU != red
+                        cpuTurn();
+                    }
+                    else{
+                        if(!teamHasMove("black")){
+                           gameOver("tie");
+                        }
+                    }
                     endTurn();
                 }
+            }
+            else {
+                console.log("Square " + boardIndex + " selected, move to it is not legal.");
             }
             break;
         default:
@@ -140,19 +187,23 @@ function jumpChain(from, to){
 }
 
 function gameOver(opts){
-        if(opts === "red"){
-            game['red']['pieceslost'] = 12;
-        }
-        else if(opts === "black"){
-            game['black']['pieceslost'] = 12;
-        }
+    if(opts === "red"){
+        game['red']['pieceslost'] = 12;
+    }
+    else if(opts === "black"){
+        game['black']['pieceslost'] = 12;
+    }
 
-    if(game['red']['pieceslost'] >= 12){
+
+    if(opts === "tie"){
+        document.getElementById("winner").innerHTML = "It's a Tie!";
+    }
+    else if(game['red']['pieceslost'] >= 12){
         game['black']['winner'] = true;
         document.getElementById("winner").innerHTML = "Black Wins!";
         return true;
     }
-    if(game['black']['pieceslost'] >= 12){
+    else if(game['black']['pieceslost'] >= 12){
         game['red']['winner'] = true;
         document.getElementById("winner").innerHTML = "Red Wins!";
         return true;
@@ -563,10 +614,10 @@ function miniMax(depth, jumpsonly, from, to){
 
                 if(isLegalMove(i, num) && isMoversTurn(i, depth) && isLegalJumpsOnlyMove(jumpsonly, to, i, num)){
                     if(depth === 0){
-                        console.log("legal move from " + i + " to " + num + " at depth " + depth);
+                        //console.log("legal move from " + i + " to " + num + " at depth " + depth);
                     }
                     else {
-                        console.log("   legal move from " + i + " to " + num + " at depth " + depth);
+                        //console.log("   legal move from " + i + " to " + num + " at depth " + depth);
                     }
                     miniMaxMove(i, parseFloat(num));
                     if(pieceHasJump(num) && Math.abs(num - i) > 10){
@@ -605,10 +656,10 @@ function miniMax(depth, jumpsonly, from, to){
 }
 
 function isNewValue(oldval, newval, depth){
-    if(depth % 2 === 0 && oldval < newval){
+    if(depth % 2 === 0 && oldval < newval){ //depth % 2 = 0 and so it is the computers turn. Who wants the value as high as possible
         return true;
     }
-    else if(depth % 2 === 1 && oldval > newval){
+    else if(depth % 2 === 1 && oldval > newval){ //depth % 2 = 1 and so it is the users turn. Who wants the value as low as possible
         return true;
     }
     else {
@@ -702,10 +753,57 @@ var id = setInterval(frame, 100);
 
 }*/
     if(bestmove.from.length === 0){
-        alert("Move failed2");
+        alert("Move failed 2... possibly not an error if the CPU actually has no moves.");
         return false;
     }
     return true;
+}
+
+function teamHasMove(color){
+    var flip;
+    if(color == "black"){
+        flip = -1;
+    }
+    else {
+        flip = 1;
+    }
+    for (i = 10; i < 81; i++) {
+        if(game['board'][i].color == color) {
+            if (isLegalMove(i, (parseFloat(i) + (16 * flip)))) {
+                return true;
+            }
+            else if (isLegalMove(i, (parseFloat(i) + (20 * flip)))) {
+                return true;
+            }
+            if(game['board'][i].king == true) {
+                if (isLegalMove(i, (parseFloat(i) - (20 * flip)))) {
+                    return true;
+                }
+                else if (isLegalMove(i, (parseFloat(i) - (20 * flip)))) {
+                    return true;
+                }
+            }
+        }
+    }
+    for (j = 10; j < 81; j++) {
+        if(game['board'][j].color == color) {
+            if (isLegalMove(j, (parseFloat(j) + (8 * flip)))){
+                return true;
+            }
+            else if (isLegalMove(j, (parseFloat(j) + (10 * flip)))){
+                return true;
+            }
+        }
+        if(game['board'][j].king == true) {
+            if (isLegalMove(j, (parseFloat(j) - (8 * flip)))) {
+                return true;
+            }
+            else if (isLegalMove(j, (parseFloat(j) - (10 * flip)))) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 function updateBoardHTML(){
@@ -730,8 +828,8 @@ function updateBoardHTML(){
 
     //update pieces lost display
 
-    document.getElementById("red-pieces-lost").innerHTML = "Red pieces lost: " + game['red']['pieceslost'];
-    document.getElementById("black-pieces-lost").innerHTML = "Black pieces lost: " + game['black']['pieceslost'];
+    document.getElementById("red-pieces-lost").innerHTML = game['red']['pieceslost'];
+    document.getElementById("black-pieces-lost").innerHTML = game['black']['pieceslost'];
     document.getElementById("current-turn").innerHTML = "Turn " + game['turn'];
     if(game['turn'] % 2 == 1){
         document.getElementById("team-to-move").innerHTML = "Team to move: black";
