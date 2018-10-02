@@ -1,0 +1,81 @@
+.boardwrapper{
+    position: relative;
+    height: 400px;
+    width: 400px;
+    border: 1px solid red;
+    background-color: white;
+    margin: 5% 10%;
+}
+
+.boardwrapper-mini{
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    font-size: 50%;
+}
+
+.board{
+    color: green;
+    width:90%;
+    height:90%;
+    margin: 5% auto;
+}
+
+.boardsquare{
+    position: relative;
+    border: 1px solid blue;
+    color: yellow;
+    height: 10%;
+    width: 10%;
+    background-clip: padding-box;
+}
+
+.boardsquareinner {
+    background-color: purple;
+    height: 10%;
+    width: 10%;
+}
+
+body {
+    background-color: rgb(32, 32, 32) !important;
+    color: whitesmoke !important;
+}
+
+.infobox{
+    margin-top: 50px;
+}
+
+.header{
+    font-size: 300%;
+    margin: 0 auto;
+    text-align: center;
+}
+.header-wrap{
+}
+
+.playerdata{
+    width: auto;
+    display: inline-block;
+    border: 1px solid blanchedalmond;
+    margin: 2% 2%;
+    background-color: silver;
+}
+
+.sidebar-nav-fixed {
+    background-color: silver;
+    opacity: 0.9;
+}
+
+.divider{
+    border-bottom: 1px solid gray;
+}
+
+.item{
+}
+
+.sidebaritem{
+    color: gray;
+}
+.navbar-brand {
+    color: white;
+}

@@ -26,20 +26,15 @@
           <file leaf-file-name="checkers.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/checkers.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="17">
-                  <caret line="587" column="12" lean-forward="true" selection-start-line="587" selection-start-column="12" selection-end-line="587" selection-end-column="12" />
+                <state relative-caret-position="-1231">
+                  <caret line="240" column="6" lean-forward="false" selection-start-line="240" selection-start-column="6" selection-end-line="240" selection-end-column="6" />
                   <folding>
-                    <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
-                    <element signature="n#!!block;n#createNewTestObject2#0" expanded="false" />
-                    <element signature="n#!!block;n#createNewTestObject3#0" expanded="false" />
-                    <element signature="n#!!block;n#createNewTestObject4#0" expanded="false" />
                     <element signature="n#!!block;n#separate#0" expanded="false" />
                     <element signature="n#!!block;n#inArray#0" expanded="false" />
                     <element signature="n#!!block;n#merciless#0" expanded="false" />
-                    <marker date="1538439967406" expanded="true" signature="22850:22901" ph="..." />
-                    <marker date="1538439967406" expanded="true" signature="22850:22924" ph="..." />
-                    <marker date="1538439967406" expanded="true" signature="23072:23103" ph="..." />
-                    <marker date="1538439967406" expanded="true" signature="23072:23146" ph="..." />
+                    <marker date="1538160688718" expanded="true" signature="20458:20509" ph="..." />
+                    <marker date="1538160688718" expanded="true" signature="20657:20688" ph="..." />
+                    <marker date="1538160688718" expanded="true" signature="20657:20731" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -230,36 +225,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>squareto</find>
+      <find>jumpsonl</find>
+      <find>jumpsonly</find>
+      <find>minimax</find>
       <find>mustJum</find>
-      <find>playerHas</find>
-      <find>gameOver</find>
-      <find>select(</find>
-      <find>animateM</find>
-      <find>is off the</find>
-      <find>setInter</find>
-      <find>bestmoveArr</find>
-      <find>cpuTurn</find>
-      <find>cpuTurn(</find>
-      <find>animate</find>
-      <find>cpumove</find>
-      <find>callBack</find>
-      <find>animatemovec</find>
-      <find>Move Fai</find>
-      <find>size</find>
-      <find>anim</find>
-      <find>left</find>
-      <find>cputu</find>
-      <find>miniMax</find>
-      <find>hasJump</find>
-      <find>hasJump</find>
-      <find>tie</find>
-      <find>hasmove</find>
-      <find>no moves</find>
-      <find>depth</find>
-      <find>hasjump</find>
+      <find>islegal</find>
+      <find>isLegalMove</find>
+      <find>board</find>
+      <find>minimaxmo</find>
+      <find>updateB</find>
+      <find>minimax(</find>
+      <find>islegalmo</find>
+      <find>king = &quot;F</find>
+      <find>alert</find>
       <find>jumpCh</find>
-      <find>move failed 2</find>
+      <find>pieceHa</find>
+      <find>king =</find>
+      <find>king = &quot;Tr</find>
+      <find>kingHan</find>
+      <find>piece</find>
+      <find>king ===</find>
+      <find>piece(</find>
+      <find>moveback</find>
+      <find>jsLo</find>
+      <find>makeNe</find>
+      <find>$chart</find>
+      <find>LastRef</find>
+      <find>input</find>
+      <find>msft</find>
+      <find>hasMove</find>
+      <find>endTurn()</find>
     </findStrings>
     <replaceStrings>
       <replace>from, to</replace>
@@ -405,12 +400,12 @@
       <workItem from="1536695129029" duration="2519000" />
       <workItem from="1536957008485" duration="10718000" />
       <workItem from="1537213071189" duration="77394000" />
-      <workItem from="1537649049729" duration="90241000" />
+      <workItem from="1537649049729" duration="68428000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="448429000" />
+    <option name="totallyTimeSpent" value="426616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1016" extended-state="6" />
@@ -464,7 +459,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -529,17 +524,12 @@
         <state relative-caret-position="2584">
           <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject2#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject3#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject4#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#merciless#0" expanded="false" />
-            <marker date="1538439967406" expanded="true" signature="22850:22901" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="22850:22924" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23103" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23146" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20458:20509" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20688" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20731" ph="..." />
           </folding>
         </state>
       </provider>
@@ -636,17 +626,12 @@
         <state relative-caret-position="1377">
           <caret line="81" column="24" lean-forward="true" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject2#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject3#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject4#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#merciless#0" expanded="false" />
-            <marker date="1538439967406" expanded="true" signature="22850:22901" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="22850:22924" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23103" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23146" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20458:20509" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20688" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20731" ph="..." />
           </folding>
         </state>
       </provider>
@@ -720,17 +705,12 @@
         <state relative-caret-position="2856">
           <caret line="168" column="18" lean-forward="false" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject2#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject3#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject4#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#merciless#0" expanded="false" />
-            <marker date="1538439967406" expanded="true" signature="22850:22901" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="22850:22924" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23103" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23146" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20458:20509" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20688" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20731" ph="..." />
           </folding>
         </state>
       </provider>
@@ -960,20 +940,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/checkers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="587" column="12" lean-forward="true" selection-start-line="587" selection-start-column="12" selection-end-line="587" selection-end-column="12" />
+        <state relative-caret-position="-1231">
+          <caret line="240" column="6" lean-forward="false" selection-start-line="240" selection-start-column="6" selection-end-line="240" selection-end-column="6" />
           <folding>
-            <element signature="n#!!block;n#createNewTestObject#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject2#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject3#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTestObject4#0" expanded="false" />
             <element signature="n#!!block;n#separate#0" expanded="false" />
             <element signature="n#!!block;n#inArray#0" expanded="false" />
             <element signature="n#!!block;n#merciless#0" expanded="false" />
-            <marker date="1538439967406" expanded="true" signature="22850:22901" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="22850:22924" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23103" ph="..." />
-            <marker date="1538439967406" expanded="true" signature="23072:23146" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20458:20509" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20688" ph="..." />
+            <marker date="1538160688718" expanded="true" signature="20657:20731" ph="..." />
           </folding>
         </state>
       </provider>

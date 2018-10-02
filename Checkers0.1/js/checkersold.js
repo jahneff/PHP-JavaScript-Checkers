@@ -1,10 +1,10 @@
 var board;
 var game;
-var emptyPiece = new Piece("none", "False");
+var emptyPiece = new Piece("none");
 
-function Piece(color, king) {
+function Piece(color) {
     this.color = color;
-    this.king = king;
+    this.king = "false";
     Piece.prototype.red = function () {
         this.color = "red";
     };
@@ -15,25 +15,16 @@ function Piece(color, king) {
 
 
 function createNewGameObject(){
-    var game = {
-        red: {
-            pieceslost: 0,
-            winner: false
-        },
-        black: {
-            pieceslost: 0,
-            winner: false
-        },
-        board:[],
-        tempboard:[],
+    var game = {red: {pieceslost: 0, winner: false}, black: {pieceslost: 0, winner: false}, board:[], tempboard:[],
         turn: 1,
         jumpsonly: 0,
+        squaretomove: 0,
         selected: null,
         mustJump: null,
         hasJump: false
     };
     for (i = 0; i < 99; i++) {
-        game['board'][i] = new Piece("none", "False");
+        game['board'][i] = new Piece("none");
     }
     for(i = 10; i < 36; i+=2){
         game['board'][i].red();
@@ -51,31 +42,14 @@ function createNewGameObject(){
 function createNewTestObject(){
     sessionStorage.removeItem('gameObj');
 
-    var game = {
-        red: {
-            pieceslost: 0,
-            winner: false
-        },
-        black: {
-            pieceslost: 0,
-            winner: false
-        },
-        board:[],
-        tempboard:[],
-        turn: 1,
-        jumpsonly: 0,
-        selected: null,
-        mustJump: null,
-        hasJump: false
-    };
+    var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], tempboard:[], turn: 1, jumpsonly: 0, squaretomove: 0};
     for (i = 0; i < 99; i++) {
-        game['board'][i] = new Piece("none", "False");
+        game['board'][i] = new Piece("none");
     }
 
 
     game['board'][20].color = "red"; //would be placed off the board, in the hidden column
     game['board'][30].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][34].color = "red"; //would be placed off the board, in the hidden column
     game['board'][40].color = "red"; //would be placed off the board, in the hidden column
     game['board'][50].color = "red"; //would be placed off the board, in the hidden column
     game['board'][58].color = "red"; //would be placed off the board, in the hidden column
@@ -94,26 +68,9 @@ function createNewTestObject(){
 function createNewTestObject2(){
     sessionStorage.removeItem('gameObj');
 
-    var game = {
-        red: {
-            pieceslost: 0,
-            winner: false
-        },
-        black: {
-            pieceslost: 0,
-            winner: false
-        },
-        board:[],
-        tempboard:[],
-        turn: 1,
-        jumpsonly: 0,
-        selected: null,
-        mustJump: null,
-        hasJump: false
-    };
-
+    var game = {red: {pieceslost: 0}, black: {pieceslost: 0}, board:[], tempboard:[], turn: 1, jumpsonly: 0, squaretomove: 0};
     for (i = 0; i < 99; i++) {
-        game['board'][i] = new Piece("none", "False");
+        game['board'][i] = new Piece("none");
     }
 
 
@@ -141,99 +98,6 @@ function createNewTestObject2(){
     game['board'][58].color = "black"; //would be placed off the board, in the hidden column
     game['board'][62].color = "black"; //would be placed off the board, in the hidden column
     game['board'][78].color = "black"; //would be placed off the board, in the hidden column
-
-    sessionStorage.setItem('gameObj', JSON.stringify(game));
-    updateBoardHTML();
-    alert("New board object stored in sessionStorage");
-}
-function createNewTestObject3(){
-    sessionStorage.removeItem('gameObj');
-
-    var game = {
-        red: {
-            pieceslost: 0,
-            winner: false
-        },
-        black: {
-            pieceslost: 0,
-            winner: false
-        },
-        board:[],
-        tempboard:[],
-        turn: 1,
-        jumpsonly: 0,
-        selected: null,
-        mustJump: null,
-        hasJump: false
-    };    for (i = 0; i < 99; i++) {
-        game['board'][i] = new Piece("none", "False");
-    }
-
-
-    game['board'][12].color = "red"; //would be placed off the board, in the hidden column
-
-    game['board'][30].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][32].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][34].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][38].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][42].color = "red"; //would be placed off the board, in the hidden column
-
-    game['board'][40].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][44].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][46].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][48].color = "red"; //would be placed off the board, in the hidden column
-
-    game['board'][50].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][52].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][56].color = "black"; //would be placed off the board, in the hidden column
-
-    game['board'][58].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][62].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][64].color = "black"; //would be placed off the board, in the hidden column
-
-    game['board'][66].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][68].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][70].color = "black"; //would be placed off the board, in the hidden column
-
-
-    sessionStorage.setItem('gameObj', JSON.stringify(game));
-    updateBoardHTML();
-    alert("New board object stored in sessionStorage");
-}
-
-function createNewTestObject4(){
-    sessionStorage.removeItem('gameObj');
-
-    var game = {
-        red: {
-            pieceslost: 0,
-            winner: false
-        },
-        black: {
-            pieceslost: 0,
-            winner: false
-        },
-        board:[],
-        tempboard:[],
-        turn: 1,
-        jumpsonly: 0,
-        selected: null,
-        mustJump: null,
-        hasJump: false
-    };
-    for (i = 0; i < 99; i++) {
-        game['board'][i] = new Piece("none", "False");
-    }
-
-    game['board'][22].color = "red"; //would be placed off the board, in the hidden column
-
-    game['board'][46].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][48].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][50].color = "black"; //would be placed off the board, in the hidden column
-    game['board'][56].color = "black"; //would be placed off the board, in the hidden column
-
-    game['board'][60].color = "red"; //would be placed off the board, in the hidden column
-    game['board'][60].king = "True"; //would be placed off the board, in the hidden column
 
     sessionStorage.setItem('gameObj', JSON.stringify(game));
     updateBoardHTML();
@@ -268,7 +132,6 @@ function loadGame(){
 }
 
 function newGame(){
-    document.getElementById("winner").innerHTML = "";
     sessionStorage.removeItem('gameObj');
     loadGame();
 }
@@ -282,155 +145,55 @@ function selectAfterJump(squareId){
     selectHandle(squareId);
 }
 
-
-
-
-function userPass(){
-    if (playerHasMove(game['turn'])) {
-        alert("You can't pass when you have a move available!")
-        return false;
-    }
-    endTurn();
-    if (playerHasMove(game['turn'])) {     //will need to change later if CPU != red
-        cpuTurn();
-        endTurn();
-        if (!playerHasMove(game['turn'])) {
-            alert("You have no moves. Hit PASS to end your turn.");
-        }
-    }
-    else {
-        endTurn();
-        if (!playerHasMove(game['turn'])) {
-            gameOver("tie");
-        }
-    }
-    return true;
-}
-
-
-function select(coords){
-    //Called when a square on the board is clicked by the user.
-    //If there is not a selected square already, return 1
-    //If there is a selected square, return 2
-    //These two return values direct the logic of the action() function.
-    var from = game['selected'];
-    if(!from) {
-        document.getElementById("sq-" + coords).style.backgroundColor = "orange";    //Select clicked square
-        return 1;
-    }
-
-    else {
-        document.getElementById("sq-" + from).style.backgroundColor = "white";    //Deselect from square
-        return 2;
-    }
-}
-
-function turnPart0(boardIndex){
-    game['selected'] = boardIndex;                    //Update moveFrom form value
-    console.log("Square " + boardIndex + " selected.");
-    sessionStorage.setItem('gameObj', JSON.stringify(game));
-    updateBoardHTML();
-}
-
-function turnPart1(boardIndex) {
-    game['moveFrom'] = game['selected'];                    //Update moveFrom form value
-    game['selected'] = null;
-    game['hasMove'] = playerHasJump(game['turn']);
-
-
-    var from = game['moveFrom'];
-    var to = boardIndex;
-
-    sessionStorage.setItem('gameObj', JSON.stringify(game));
-    if (isLegalMove(from, to) && isMoversTurn(from, game['turn'])) {
-        animateMove(from, to, turnPart2);
-        return 1;
-    }
-    else {
-        console.log("Square " + boardIndex + " selected, move to it is not legal.");
-        return 0;
-    }
-}
-
-function turnPart2(from, to) {
-    playerMove(from, to);
-    checkGameOver();
-    sessionStorage.setItem('gameObj', JSON.stringify(game));
-    updateBoardHTML();
-    if (!jumpChain(from, to)) {
-        endTurn();
-        if (playerHasMove(game['turn'])) {     //will need to change later if CPU != red
-            cpuTurn(turnPart3);
-        }
-        else {
-            endTurn();
-            if (!playerHasMove(game['turn'])) {
-                gameOver("tie");
-            }
-        }
-    }
-    else { //a jump has been made, and another is available, so the turn continues.
-        return 0;
-    }
-}
-
-function turnPart3(){
-    checkGameOver();
-    endTurn();
-    if (!playerHasMove(game['turn'])) {
-        alert("You have no moves. Hit PASS to end your turn.");
-    }
-}
-
 function action(squareID){
     var boardIndex = arrayifyCoords(squareID);
     switch (select(boardIndex)){
         case 1: //just a select
-            turnPart0(boardIndex);
+            console.log("Square " + boardIndex + " selected.");
+            sessionStorage.setItem('gameObj', JSON.stringify(game));
+            updateBoardHTML();
             break;
         case 2: //triggers a move
-            turnPart1(boardIndex);
+            var from = game['moveFrom'];
+            var to = boardIndex;
+            if(!(Math.abs(from - to) <= 10 && playerHasJump(game['turn']))) {
+
+                if (isLegalMove(from, to) && isMoversTurn(from, game['turn'])) {
+                    console.log("Square " + boardIndex + " selected, move to it is legal.");
+                    playerMove(from, to);
+                    sessionStorage.setItem('gameObj', JSON.stringify(game));
+                    updateBoardHTML();
+                    if (!jumpChain(from, to)) {
+                        endTurn();
+
+
+                        if (teamHasMove("red")) {     //will need to change later if CPU != red
+                            cpuTurn();
+                        }
+                        else {
+                            if (!teamHasMove("black")) {
+                                gameOver("tie");
+                            }
+                        }
+
+
+                        endTurn();
+                    }
+                }
+                else {
+                    console.log("Square " + boardIndex + " selected, move to it is not legal.");
+                }
+            }
+            else{
+                console.log("Player has a jump, they must take it.");
+            }
             break;
         default:
             alert("select failed!");
             break;
     }
+    gameOver();
 }
-
-function cpuTurn(callbackFunc){
-
-    //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move.
-    var bestmoveArray;
-    bestmoveArray = runMiniMax();
-    var size = bestmoveArray.from.length;
-    var pos = 0;
-    var k = 0;
-    var id = setInterval(function(){
-        k = cpuTurnMeat(k, size, bestmoveArray)
-    }, 1000);
-
-
-    function cpuTurnMeat(k, size, bestmoveArray) {
-        if(bestmoveArray.from.length === 0){
-            alert("Move failed 2... possibly not an error if the CPU actually has no moves.");
-            return k+1;
-        }
-        if(k === size){
-            //alert("size " + size + ", k: " + k);
-            clearInterval(id);
-            callbackFunc();
-            return k+1;
-        }
-        if (!animateMove(bestmoveArray.from[size - (k + 1)], bestmoveArray.to[size - (k + 1)], cpuMove)) { //Move()
-            alert("Move Failed");
-            return k+1;
-        }
-
-        return k+1;
-    }
-
-}
-
 
 function jumpChain(from, to){
     var moveDistance = Math.abs(from - to);
@@ -440,33 +203,46 @@ function jumpChain(from, to){
     return false;
 }
 
-
-function checkGameOver(opts){
-    if(game['red']['pieceslost'] >= 12){
-        return gameOver("black");
-    }
-    else if(game['black']['pieceslost'] >= 12){
-        return gameOver("red");
-    }
-    return false;
-}
-
 function gameOver(opts){
+    if(opts === "red"){
+        game['red']['pieceslost'] = 12;
+    }
+    else if(opts === "black"){
+        game['black']['pieceslost'] = 12;
+    }
+
+
     if(opts === "tie"){
         document.getElementById("winner").innerHTML = "It's a Tie!";
-        return true;
     }
-    else if(opts === "red"){
+    else if(game['red']['pieceslost'] >= 12){
         game['black']['winner'] = true;
         document.getElementById("winner").innerHTML = "Black Wins!";
         return true;
     }
-    else if(opts === "black"){
+    else if(game['black']['pieceslost'] >= 12){
         game['red']['winner'] = true;
         document.getElementById("winner").innerHTML = "Red Wins!";
         return true;
     }
     return false;
+}
+
+function select(coords){
+    var from = game['selected'];
+    //alert(moveFrom.value + ", " + moveTo.value);
+    if(!from) {//MoveFrom has not been selected
+        game['selected'] = coords;                    //Update moveFrom form value
+        document.getElementById("sq-" + coords).style.backgroundColor = "orange";    //Select clicked square
+        return 1;
+    }
+
+    else {
+        document.getElementById("sq-" + from).style.backgroundColor = "white";    //Deselect from square
+        game['moveFrom'] = game['selected'];                    //Update moveFrom form value
+        game['selected'] = null;
+        return 2;
+    }
 }
 
 function arrayifyCoords(coords){ //Takes sq-# as an argument and returns only #
@@ -578,19 +354,15 @@ function animateMove(from, to, callbackFunc) {
     function frame() {
         if (pos == 50) {
             clearInterval(id);
-            callbackFunc(from, to);
-            sessionStorage.setItem('gameObj', JSON.stringify(game));
-            updateBoardHTML();
-                //alert("Move Failed");
-             //Move()
+            callbackFunc(from, to); //Move()
+            //updateBoardHTML();
         } else {
             pos++;
-            //piece.style.color = "green";
+            piece.style.color = "green";
             piece.style.left = 15 + (pos * hor) + "px";
             piece.style.top = 15 + (pos * vert) + "px";
         }
     }
-    return true;
 }
 
 function kingHandle(from, to){
@@ -605,14 +377,14 @@ function kingHandle(from, to){
 function realMove(from, to){
     kingHandle(from, to);
     game['board'][to] = game['board'][from];
-    game['board'][from] = new Piece("none", "False");
+    game['board'][from] = new Piece("none");
     game['mustJump'] = null;
     var dist = from - to;
 
     if(Math.abs(dist) > 11){
         var jumpedPieceColor = game['board'][(from - Math.floor(dist/2))].color;
         game[jumpedPieceColor]['pieceslost']++;
-        game['board'][(from - Math.floor(dist/2))] = new Piece("none", "False");  //remove jumped piece from board
+        game['board'][(from - Math.floor(dist/2))] = new Piece("none");  //remove jumped piece from board
         if(pieceHasJump(to)){
             game['mustJump'] = to;
         }
@@ -623,7 +395,7 @@ function realMove(from, to){
 
 function moveBack(from, to){
     game['board'][to] = game['board'][from];
-    game['board'][from] = new Piece("none", "False");
+    game['board'][from] = new Piece("none");
     var dist = from - to;
     if(Math.abs(dist) > 10){
             if(game['board'][to].color === "red"){ //was it the cpus turn?
@@ -674,24 +446,18 @@ function isLegalMove(from, to){
     var movingPiece = game['board'][from];
     var jumpedPiece = game['board'][(from - Math.floor(signedDist / 2))];
 
-    if(!moveIsOnBoard(from, to)){
-        console.log("Move from " + from + " to " + to + " is off the board.");
+    if(!moveIsOnBoard(from , to)){
         return false;
     }
-    if(game['mustJump'] !== null){
-        if(game['mustJump'] !== from || Math.abs(signedDist) <= 10){
+
+    if(game['mustJump'] != null){
+        if(game['mustJump'] != from || Math.abs(signedDist) <= 10){
                 console.log("piece at " + game['mustJump'] + " must jump");
                 return false;
         }
     }
 
-    if(game['hasJump'] === true && Math.abs(signedDist) <= 10){
-        console.log("Player has a jump, they must take it.");
-        return false;
-    }
-
     if(game['board'][to]['color'] !== "none") {
-        console.log("Move from " + from + " to " + to + " is to an occupied space.");
         return false;
     }//is the space being moved to already occupied?
 
@@ -739,10 +505,13 @@ function isLegalMove(from, to){
     }
 }
 
+
+
+
 function updateSquareHTML(square, i){
     if(square['color'] !== "none") {
         if(square['king'] === "True"){
-            document.getElementById("sq-" + i).innerHTML = "<i class='fas fa-chess-king' id='p-" + i + "' style='color: " + square['color'] + "; position: absolute; left: 15px; top: 15px;'></i>";
+            document.getElementById("sq-" + i).innerHTML = "<i class='fas fa-chess-king' id='p-" + i + "' style='color: " + square['color'] + "; position: absolute;'></i>";
         }
         else {
             document.getElementById("sq-" + i).innerHTML = "<i class='fas fa-hockey-puck' id='p-" + i + "' style='color: " + square['color'] + "; position: absolute; left: 15px; top: 15px;'></i>";
@@ -767,8 +536,8 @@ function continueTurn(){
     updateBoardHTML();
     if ((game['turn'] % 2 != 1)) {
 
-
         alert("jumpsonly: " + game['jumpsonly']);
+        alert("squaretomove: " + game['squaretomove']);
 
         setTimeout(cpuTurn, 1000);
     }
@@ -819,16 +588,11 @@ function isLegalJumpsOnlyMove(jumpsonly, toMove, from, to){
 
 function miniMaxMove(from, to){
     game['board'][to] = game['board'][from];
-    game['board'][from] = new Piece("none", "False");
+    game['board'][from] = new Piece("none");
     var dist = from - to;
 
     if(Math.abs(dist) > 11){
-        if(game['board'][(from - Math.floor(dist/2))].king === "True"){
-            game['board'][(from - Math.floor(dist/2))] = new Piece("none", "True");  //remove jumped piece from board
-        }
-        else {
-            game['board'][(from - Math.floor(dist / 2))] = new Piece("none", "False");  //remove jumped piece from board
-        }
+        game['board'][(from - Math.floor(dist/2))] = new Piece("none");  //remove jumped piece from board
         sessionStorage.setItem('gameObj', JSON.stringify(game));         //need this here to set up piecehasjump
         if(pieceHasJump(to)){
             game['mustJump'] = to;
@@ -845,112 +609,23 @@ function miniMaxMove(from, to){
     }
 }
 
-function getTeamToMove(turn){
-    if(turn % 2 === 0){
-        return "red";
-    }
-    else if(turn % 2 === 1){
-        return "black";
-    }
-    else {
-        alert("ERR_713");
-        return undefined;
-    }
-
-}
-
 function playerHasJump(turn){
-    var color = getTeamToMove(turn);
     var moves = [16, 20, -16, -20];
+
     for (var i = 10; i <= 81; i++) {
-        if(isMoversTurn(i, turn)) {
-            for (var j = 0; j < 4; j++) {
-                var num = i + moves[j];
-                if (isLegalMove(i, num)) {
-                    //alert(color + " has a jump from " + i + " to " + num);
-                    return true;
-                }
+        for (var j = 0; j < 4; j++){
+            var num = i + moves[j];
+            if(isLegalMove(i, num) && isMoversTurn(i, turn)){
+                return true;
             }
         }
     }
-    //alert(color + " does not have a jump");
-
-    return false;
-}
-
-function playerHasMove(turn){
-    var moves = [8, 10, 16, 20, -8, -10, -16, -20];
-    for (var i = 10; i <= 81; i++) {
-        if(isMoversTurn(i, turn)) {
-            for (var j = 0; j < 8; j++) {
-                var num = i + moves[j];
-                if (isLegalMove(i, num)) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-function comparisonTest(){
-    if(teamHasMove("black") != playerHasMove(0)){
-        alert("Here1");
-    }
-    if(teamHasMove("red") != playerHasMove(1)){
-        alert("Here2");
-    }
-}
-
-function teamHasMove(color){
-    var flip;
-    if(color == "black"){
-        flip = -1;
-    }
-    else {
-        flip = 1;
-    }
-    for (i = 10; i < 81; i++) {
-        if(game['board'][i].color == color) {
-            if (isLegalMove(i, (parseFloat(i) + (16 * flip)))) {
-                return true;
-            }
-            else if (isLegalMove(i, (parseFloat(i) + (20 * flip)))) {
-                return true;
-            }
-            if(game['board'][i].king == true) {
-                if (isLegalMove(i, (parseFloat(i) - (20 * flip)))) {
-                    return true;
-                }
-                else if (isLegalMove(i, (parseFloat(i) - (20 * flip)))) {
-                    return true;
-                }
-            }
-            if (isLegalMove(j, (parseFloat(j) + (8 * flip)))) {
-                return true;
-            }
-            else if (isLegalMove(j, (parseFloat(j) + (10 * flip)))) {
-                return true;
-            }
-
-            if (game['board'][j].king == true) {
-                if (isLegalMove(j, (parseFloat(j) - (8 * flip)))) {
-                    return true;
-                }
-                else if (isLegalMove(j, (parseFloat(j) - (10 * flip)))) {
-                    return true;
-                }
-            }
-        }
-    }
-
-    alert("false");
     return false;
 }
 
 function miniMax(depth, jumpsonly, from, to){
     game = JSON.parse(sessionStorage.getItem('gameObj'));
-    score = getScore(game['board']);
+    score = getScore(game['board'])
     if(depth === 2){
         var returnval = {score: score, to: to, from: from, moveIsInitialized: false};
         return returnval;
@@ -960,11 +635,16 @@ function miniMax(depth, jumpsonly, from, to){
     var returnval = {score: score, to: [], from: [], moveIsInitialized: false};
 
     var moves = [8, 10, 16, 20, -8, -10, -16, -20];
-    var hasJump = playerHasJump(depth);
+
+
+
+
+
     for (var i = 10; i <= 81; i++){
         for (var j = 0; j < 8; j++){
             var num = i + moves[j];
-            if(!(Math.abs(num - i) <= 10 && hasJump)) {
+            var v = playerHasJump(depth);
+            if(!(Math.abs(num - i) <= 10 && playerHasJump(depth))) {
                 if (isLegalMove(i, num) && isMoversTurn(i, depth)) {   //if move from i to num is legal at the current depth
                     if (depth === 0) {
                         console.log("legal move from " + i + " to " + num + " at depth " + depth);
@@ -1068,19 +748,18 @@ function merciless(){
 }
 
 function cpuMove(from, to){
-    //alert("CPUmove from: " + from + " to " + to);
+    alert("CPUmove from: " + from + " to " + to);
     if(attemptMove(from, to)){
         return true;
     }
     return false;
 }
 
-function cpuTurnOld(){
+function cpuTurn(){
 
     //"Merciless" AI jumps as many times as it can. If no jumps are available, it plays a regular move.
-    var bestmoveArray;
-    bestmoveArray = runMiniMax();
-
+    var bestmove;
+    bestmove = runMiniMax();
     var size = bestmoveArray.from.length;
     var pos = 0;
     for (var k = (size - 1); k >= 0; k--) {
@@ -1090,15 +769,80 @@ function cpuTurnOld(){
         }
         sessionStorage.setItem('gameObj', JSON.stringify(game));
     }
+/*function frame() {
+    if(pos === (size * 5) || k < 0) {
+        clearInterval(id);
+    }
+    else if (pos % 5 === 0) {
+        if(!cpuMove(bestmoveArray.from[k], bestmoveArray.to[k])) { //Move()
+            alert("Move Failed");
+        }
+        k--;
+    }
+    pos++;
 
-    if(bestmoveArray.from.length === 0){
+}
+var id = setInterval(frame, 100);
+/*for (var i = (size - 1); i >= 0; i--){
+    if(!cpuMove(bestmoveArray.from[i], bestmoveArray.to[i])){
+        alert("Move failed");
+        return false;
+    }
+
+}*/
+    if(bestmove.from.length === 0){
         alert("Move failed 2... possibly not an error if the CPU actually has no moves.");
         return false;
     }
     return true;
 }
 
-
+function teamHasMove(color){
+    var flip;
+    if(color == "black"){
+        flip = -1;
+    }
+    else {
+        flip = 1;
+    }
+    for (i = 10; i < 81; i++) {
+        if(game['board'][i].color == color) {
+            if (isLegalMove(i, (parseFloat(i) + (16 * flip)))) {
+                return true;
+            }
+            else if (isLegalMove(i, (parseFloat(i) + (20 * flip)))) {
+                return true;
+            }
+            if(game['board'][i].king == true) {
+                if (isLegalMove(i, (parseFloat(i) - (20 * flip)))) {
+                    return true;
+                }
+                else if (isLegalMove(i, (parseFloat(i) - (20 * flip)))) {
+                    return true;
+                }
+            }
+        }
+    }
+    for (j = 10; j < 81; j++) {
+        if(game['board'][j].color == color) {
+            if (isLegalMove(j, (parseFloat(j) + (8 * flip)))){
+                return true;
+            }
+            else if (isLegalMove(j, (parseFloat(j) + (10 * flip)))){
+                return true;
+            }
+        }
+        if(game['board'][j].king == true) {
+            if (isLegalMove(j, (parseFloat(j) - (8 * flip)))) {
+                return true;
+            }
+            else if (isLegalMove(j, (parseFloat(j) - (10 * flip)))) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 function updateBoardHTML(){
     game = JSON.parse(sessionStorage.getItem('gameObj'));
